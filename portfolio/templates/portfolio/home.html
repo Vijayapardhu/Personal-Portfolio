@@ -1,0 +1,398 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Vijaya Pardhu - Portfolio | Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Extraordinary Design -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-accent/30 to-accent4/30 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-br from-neon/20 to-neon2/20 rounded-full blur-2xl animate-float"></div>
+        <div class="absolute top-1/4 right-1/4 w-48 h-48 bg-gradient-to-br from-accent3/25 to-neon4/25 rounded-full blur-xl animate-bounce-slow"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 text-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Profile Image -->
+        <div class="mb-8" data-aos="zoom-in" data-aos-delay="200">
+            <div class="relative inline-block">
+                <div class="w-32 h-32 md:w-40 md:h-40 bg-gradient-to-br from-primary via-secondary to-accent rounded-full p-1 animate-pulse-slow">
+                    <div class="w-full h-full bg-gradient-to-br from-dark via-darker to-dark rounded-full flex items-center justify-center text-4xl md:text-6xl font-bold text-white">
+                        VP
+                    </div>
+                </div>
+                <!-- Floating Elements Around Profile -->
+                <div class="absolute -top-4 -right-4 w-8 h-8 bg-accent3 rounded-full animate-bounce-slow"></div>
+                <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-accent4 rounded-full animate-bounce-slow" style="animation-delay: 1s;"></div>
+                <div class="absolute top-1/2 -right-8 w-4 h-4 bg-neon rounded-full animate-pulse-slow"></div>
+            </div>
+        </div>
+
+        <!-- Hero Title -->
+        <h1 class="text-5xl md:text-7xl font-bold mb-6" data-aos="fade-up" data-aos-delay="300">
+            <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                👋 Hey, I'm Vijaya Pardhu
+            </span>
+        </h1>
+
+        <!-- Hero Subtitle -->
+        <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="400">
+            <span class="bg-gradient-to-r from-accent2 via-accent3 to-accent4 bg-clip-text text-transparent font-semibold">
+                💻 Student | Android & Web Developer | Firebase Enthusiast 🚀
+            </span>
+        </p>
+
+        <!-- Profile Stats -->
+        <div class="flex flex-wrap justify-center gap-6 mb-12" data-aos="fade-up" data-aos-delay="500">
+            {% if profile_stats %}
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl px-6 py-4 transform hover:scale-105 transition-all duration-300 hover:border-primary">
+                <div class="text-3xl font-bold text-primary mb-1">{{ profile_stats.profile_views|default:"0" }}</div>
+                <div class="text-sm text-gray-300">Profile Views</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl px-6 py-4 transform hover:scale-105 transition-all duration-300 hover:border-secondary">
+                <div class="text-3xl font-bold text-secondary mb-1">{{ profile_stats.github_followers|default:"0" }}</div>
+                <div class="text-sm text-gray-300">GitHub Followers</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl px-6 py-4 transform hover:scale-105 transition-all duration-300 hover:border-accent">
+                <div class="text-3xl font-bold text-accent mb-1">{{ profile_stats.github_stars|default:"0" }}</div>
+                <div class="text-sm text-gray-300">GitHub Stars</div>
+            </div>
+            {% else %}
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl px-6 py-4 transform hover:scale-105 transition-all duration-300 hover:border-primary">
+                <div class="text-3xl font-bold text-primary mb-1">0</div>
+                <div class="text-sm text-gray-300">Profile Views</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl px-6 py-4 transform hover:scale-105 transition-all duration-300 hover:border-secondary">
+                <div class="text-3xl font-bold text-secondary mb-1">0</div>
+                <div class="text-sm text-gray-300">GitHub Followers</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl px-6 py-4 transform hover:scale-105 transition-all duration-300 hover:border-accent">
+                <div class="text-3xl font-bold text-accent mb-1">0</div>
+                <div class="text-sm text-gray-300">GitHub Stars</div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Call to Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="600">
+            <a href="{% url 'portfolio:download_cv' %}" class="btn-primary group">
+                <span class="flex items-center justify-center">
+                    <i class="fas fa-download mr-2 group-hover:animate-bounce"></i>
+                    Download CV
+                </span>
+            </a>
+            <a href="{% url 'portfolio:projects' %}" class="btn-secondary group">
+                <span class="flex items-center justify-center">
+                    <i class="fas fa-code mr-2 group-hover:animate-pulse"></i>
+                    View Projects
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce" data-aos="fade-up" data-aos-delay="800">
+        <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+            <div class="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+        </div>
+    </div>
+</section>
+
+<!-- About Me Section -->
+<section class="py-20 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                    About Me
+                </span>
+            </h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Passionate about building meaningful technology solutions that address real-world problems. 
+                From college management systems to church applications, I create apps that make a difference.
+            </p>
+        </div>
+
+        <!-- About Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Education Card -->
+            <div class="card card-3d group" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Education</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Diploma in Computer Engineering @ Aditya College of Engineering, Surampalem (2023–2026)
+                    </p>
+                    <div class="mt-4">
+                        <div class="text-2xl font-bold text-primary">76%</div>
+                        <div class="text-sm text-gray-400">Current Score</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Passions Card -->
+            <div class="card card-3d group" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary to-accent rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-heart text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Passions</h3>
+                    <div class="space-y-2">
+                        <div class="inline-block px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">Android Development</div>
+                        <div class="inline-block px-3 py-1 bg-secondary/20 text-secondary rounded-full text-sm">Firebase</div>
+                        <div class="inline-block px-3 py-1 bg-accent/20 text-accent rounded-full text-sm">AI Automation</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activities Card -->
+            <div class="card card-3d group" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent to-accent2 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-rocket text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Activities</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Building apps for colleges, churches, and real-world use. Solving problems through innovative code.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Goals Section -->
+<section class="py-20 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="card text-center" data-aos="zoom-in">
+            <div class="max-w-4xl mx-auto">
+                <div class="w-20 h-20 bg-gradient-to-br from-neon to-neon2 rounded-full flex items-center justify-center mx-auto mb-6 animate-pulse-slow">
+                    <i class="fas fa-target text-3xl text-white"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                    My Goal
+                </h2>
+                <p class="text-xl text-gray-300 leading-relaxed">
+                    To become a <span class="text-gradient-primary font-semibold">Full-Stack Developer</span>, 
+                    skilled in <span class="text-gradient-secondary font-semibold">Android</span>, 
+                    <span class="text-gradient-accent font-semibold">Cloud</span>, and 
+                    <span class="text-gradient-primary font-semibold">Modern Web Tech</span>, 
+                    while contributing to <span class="text-gradient-secondary font-semibold">open-source</span> & 
+                    building <span class="text-gradient-accent font-semibold">meaningful tech for society</span>.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Projects Section -->
+<section class="py-20 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                    Featured Projects
+                </span>
+            </h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Here are some of my most impactful projects that showcase my skills and passion for development.
+            </p>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% if featured_projects %}
+                {% for project in featured_projects %}
+                <div class="project-card group" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                    <div class="p-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-code text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 text-center">{{ project.title }}</h3>
+                        <p class="text-gray-300 text-center mb-4 leading-relaxed">{{ project.description }}</p>
+                        <div class="text-center">
+                            <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105">
+                                <i class="fab fa-github mr-2"></i>
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Default Project Cards -->
+                <div class="project-card group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-mobile-alt text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 text-center">HeySara</h3>
+                        <p class="text-gray-300 text-center mb-4 leading-relaxed">AI-powered personal assistant app with natural language processing capabilities.</p>
+                        <div class="text-center">
+                            <a href="#" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary to-secondary text-white rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105">
+                                <i class="fab fa-github mr-2"></i>
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-secondary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-church text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 text-center">Church App</h3>
+                        <p class="text-gray-300 text-center mb-4 leading-relaxed">Comprehensive church management system with event scheduling and member management.</p>
+                        <div class="text-center">
+                            <a href="#" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-secondary to-accent text-white rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105">
+                                <i class="fab fa-github mr-2"></i>
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="p-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-accent to-accent2 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-university text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 text-center">College Management</h3>
+                        <p class="text-gray-300 text-center mb-4 leading-relaxed">Complete college management system with student, faculty, and course management.</p>
+                        <div class="text-center">
+                            <a href="#" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-accent to-accent2 text-white rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105">
+                                <i class="fab fa-github mr-2"></i>
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- View All Projects Button -->
+        <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="400">
+            <a href="{% url 'portfolio:projects' %}" class="btn-primary group">
+                <span class="flex items-center justify-center">
+                    <i class="fas fa-arrow-right mr-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                    View All Projects
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Tech Stack Section -->
+<section class="py-20 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                    Tech Stack
+                </span>
+            </h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                My arsenal of technologies and tools that I use to bring ideas to life.
+            </p>
+        </div>
+
+        <!-- Skills Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8">
+            {% if skills %}
+                {% for skill in skills %}
+                <div class="text-center group" data-aos="zoom-in" data-aos-delay="{{ forloop.counter|add:100 }}">
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-primary/40 group-hover:to-secondary/40">
+                        <i class="fas fa-code text-2xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <div class="text-sm text-gray-300 font-medium">{{ skill.name }}</div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Default Skills -->
+                <div class="text-center group" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-primary/40 group-hover:to-secondary/40">
+                        <i class="fab fa-java text-2xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <div class="text-sm text-gray-300 font-medium">Java</div>
+                </div>
+
+                <div class="text-center group" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-secondary/40 group-hover:to-accent/40">
+                        <i class="fab fa-kotlin text-2xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <div class="text-sm text-gray-300 font-medium">Kotlin</div>
+                </div>
+
+                <div class="text-center group" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent/20 to-accent2/20 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-accent/40 group-hover:to-accent2/40">
+                        <i class="fab fa-python text-2xl text-accent group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <div class="text-sm text-gray-300 font-medium">Python</div>
+                </div>
+
+                <div class="text-center group" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent2/20 to-accent3/20 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-accent2/40 group-hover:to-accent3/40">
+                        <i class="fab fa-js text-2xl text-accent2 group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <div class="text-sm text-gray-300 font-medium">JavaScript</div>
+                </div>
+
+                <div class="text-center group" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent3/20 to-accent4/20 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-accent3/40 group-hover:to-accent4/40">
+                        <i class="fab fa-firebase text-2xl text-accent3 group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <div class="text-sm text-gray-300 font-medium">Firebase</div>
+                </div>
+
+                <div class="text-center group" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent4/20 to-accent5/20 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-accent4/40 group-hover:to-accent5/40">
+                        <i class="fab fa-git-alt text-2xl text-accent4 group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <div class="text-sm text-gray-300 font-medium">Git</div>
+                </div>
+
+                <div class="text-center group" data-aos="zoom-in" data-aos-delay="700">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent5/20 to-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-accent5/40 group-hover:to-primary/40">
+                        <i class="fas fa-palette text-2xl text-accent5 group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <div class="text-sm text-gray-300 font-medium">Figma</div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="py-20 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="card" data-aos="zoom-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                Ready to Work Together?
+            </h2>
+            <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                Let's discuss your project and see how we can create something amazing together.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'portfolio:contact' %}" class="btn-primary group">
+                    <span class="flex items-center justify-center">
+                        <i class="fas fa-envelope mr-2 group-hover:animate-bounce"></i>
+                        Get In Touch
+                    </span>
+                </a>
+                <a href="{% url 'portfolio:about' %}" class="btn-secondary group">
+                    <span class="flex items-center justify-center">
+                        <i class="fas fa-user mr-2 group-hover:animate-pulse"></i>
+                        Learn More
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

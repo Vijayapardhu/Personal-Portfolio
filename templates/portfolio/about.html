@@ -1,0 +1,416 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About - Vijaya Pardhu{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-20">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6" data-aos="fade-down">
+            About <span class="text-blue-600">Me</span>
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            Get to know me better - my journey, skills, and what drives me to create amazing technology solutions.
+        </p>
+    </div>
+</section>
+
+<!-- Education Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl font-bold text-gray-900 mb-6">
+                <span class="text-blue-600">Education</span> & Learning
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                My academic journey and continuous learning path in technology and development.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {% for edu in education %}
+            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200 hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}">
+                <div class="flex items-start space-x-4">
+                    <div class="text-3xl text-blue-600">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">{{ edu.degree }}</h3>
+                        <p class="text-gray-700 mb-2">{{ edu.institution }}</p>
+                        {% if edu.location %}
+                        <p class="text-gray-500 mb-3">{{ edu.location }}</p>
+                        {% endif %}
+                        <div class="flex items-center justify-between">
+                            <span class="text-blue-600 font-semibold">
+                                {{ edu.start_year }} - {% if edu.current %}Present{% else %}{{ edu.end_year }}{% endif %}
+                            </span>
+                            {% if edu.score %}
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                                {{ edu.score }}
+                            </span>
+                            {% endif %}
+                        </div>
+                        {% if edu.description %}
+                        <p class="text-gray-600 mt-3 text-sm">{{ edu.description }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200 hover:shadow-lg transition-all duration-300" data-aos="fade-up">
+                <div class="flex items-start space-x-4">
+                    <div class="text-3xl text-blue-600">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Diploma in Computer Engineering</h3>
+                        <p class="text-gray-700 mb-2">Aditya College of Engineering</p>
+                        <p class="text-gray-500 mb-3">Surampalem, Andhra Pradesh</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-blue-600 font-semibold">2023 - Present</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">76%</span>
+                        </div>
+                        <p class="text-gray-600 mt-3 text-sm">Studying computer engineering with focus on software development, databases, and web technologies. Active in coding clubs and hackathons.</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Technical Skills Section -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl font-bold text-gray-900 mb-6">
+                Technical <span class="text-blue-600">Skills</span>
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                A comprehensive overview of my technical expertise and proficiency levels.
+            </p>
+        </div>
+        
+        {% regroup skills by category as skill_categories %}
+        {% for category in skill_categories %}
+        <div class="mb-12" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+                {{ category.grouper|title }}
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for skill in category.list %}
+                <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="text-2xl text-blue-600">
+                            <i class="{{ skill.icon }}"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-semibold text-gray-900">{{ skill.name }}</h4>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full transition-all duration-500" style="width: {{ skill.proficiency }}%"></div>
+                            </div>
+                            <span class="text-gray-600 text-sm font-medium">{{ skill.proficiency }}%</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% empty %}
+        <!-- Default skills if no data -->
+        <div class="mb-12" data-aos="fade-up">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Programming Languages</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="text-2xl text-blue-600">
+                            <i class="fab fa-java"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-semibold text-gray-900">Java</h4>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                            <span class="text-gray-600 text-sm font-medium">85%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="text-2xl text-blue-600">
+                            <i class="fab fa-android"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-semibold text-gray-900">Kotlin</h4>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                            <span class="text-gray-600 text-sm font-medium">80%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-center space-x-4 mb-4">
+                        <div class="text-2xl text-blue-600">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-semibold text-gray-900">Python</h4>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                            <span class="text-gray-600 text-sm font-medium">75%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Experience Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl font-bold text-gray-900 mb-6">
+                <span class="text-blue-600">Experience</span> & Work
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                My professional journey and hands-on experience in various development roles.
+            </p>
+        </div>
+        
+        <div class="space-y-8">
+            {% for exp in experience %}
+            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200 hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}">
+                <div class="flex items-start space-x-6">
+                    <div class="text-3xl text-blue-600 mt-2">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gray-900">{{ exp.title }}</h3>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium capitalize">
+                                {{ exp.experience_type }}
+                            </span>
+                        </div>
+                        <p class="text-gray-700 mb-2">{{ exp.company }}</p>
+                        {% if exp.location %}
+                        <p class="text-gray-500 mb-3">{{ exp.location }}</p>
+                        {% endif %}
+                        <div class="flex items-center space-x-4 mb-4">
+                            <span class="text-blue-600 font-semibold">
+                                {{ exp.start_date|date:"M Y" }} - {% if exp.current %}Present{% else %}{{ exp.end_date|date:"M Y" }}{% endif %}
+                            </span>
+                        </div>
+                        <p class="text-gray-600 mb-4">{{ exp.description }}</p>
+                        {% if exp.technologies_used %}
+                        <div class="mb-4">
+                            <h4 class="text-sm font-semibold text-gray-700 mb-2">Technologies Used:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                {% for tech in exp.technologies_used %}
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">{{ tech }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if exp.achievements %}
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-700 mb-2">Key Achievements:</h4>
+                            <p class="text-gray-600 text-sm">{{ exp.achievements }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Default experience if no data -->
+            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200 hover:shadow-lg transition-all duration-300" data-aos="fade-up">
+                <div class="flex items-start space-x-6">
+                    <div class="text-3xl text-blue-600 mt-2">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-gray-900">Freelance Android Developer</h3>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium capitalize">Freelance</span>
+                        </div>
+                        <p class="text-gray-700 mb-2">Self-Employed</p>
+                        <p class="text-gray-500 mb-3">Remote</p>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <span class="text-blue-600 font-semibold">Sep 2023 - Present</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Developing custom Android applications for clients, including church management apps and business solutions. Working with various technologies and delivering high-quality products.</p>
+                        <div class="mb-4">
+                            <h4 class="text-sm font-semibold text-gray-700 mb-2">Technologies Used:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Kotlin</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Java</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Android SDK</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Firebase</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-700 mb-2">Key Achievements:</h4>
+                            <p class="text-gray-600 text-sm">Delivered 5+ successful projects, maintained 4.8+ star rating from clients</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Certifications Section -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl font-bold text-gray-900 mb-6">
+                <span class="text-blue-600">Certifications</span> & Training
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Professional certifications and courses that validate my skills and knowledge.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for cert in certifications %}
+            <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}">
+                <div class="text-center mb-4">
+                    <div class="text-4xl text-blue-600 mb-3">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">{{ cert.name }}</h3>
+                    <p class="text-gray-600 text-sm mb-3">{{ cert.issuing_organization }}</p>
+                </div>
+                
+                <div class="space-y-2 mb-4">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Issued:</span>
+                        <span class="text-gray-900 font-medium">{{ cert.issue_date|date:"M Y" }}</span>
+                    </div>
+                    {% if cert.expiry_date %}
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Expires:</span>
+                        <span class="text-gray-900 font-medium">{{ cert.expiry_date|date:"M Y" }}</span>
+                    </div>
+                    {% endif %}
+                    {% if cert.credential_id %}
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">ID:</span>
+                        <span class="text-gray-900 font-medium text-xs">{{ cert.credential_id }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                {% if cert.description %}
+                <p class="text-gray-600 text-sm mb-4">{{ cert.description }}</p>
+                {% endif %}
+                
+                {% if cert.credential_url %}
+                <a href="{{ cert.credential_url }}" target="_blank" rel="noopener" class="block w-full bg-blue-600 text-white text-center py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm font-medium">
+                    View Credential
+                </a>
+                {% endif %}
+            </div>
+            {% empty %}
+            <!-- Default certifications if no data -->
+            <div class="bg-white rounded-2xl p-6 border border-gray-200 hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up">
+                <div class="text-center mb-4">
+                    <div class="text-4xl text-blue-600 mb-3">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Google Firebase Fundamentals</h3>
+                    <p class="text-gray-600 text-sm mb-3">Google</p>
+                </div>
+                
+                <div class="space-y-2 mb-4">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Issued:</span>
+                        <span class="text-gray-900 font-medium">Jan 2024</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">ID:</span>
+                        <span class="text-gray-900 font-medium text-xs">FIREBASE-2024-001</span>
+                    </div>
+                </div>
+                
+                <p class="text-gray-600 text-sm mb-4">Comprehensive understanding of Firebase services including Authentication, Firestore, Cloud Functions, and Hosting.</p>
+                
+                <a href="#" class="block w-full bg-blue-600 text-white text-center py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm font-medium">
+                    View Credential
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Hobbies Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl font-bold text-gray-900 mb-6">
+                <span class="text-blue-600">Hobbies</span> & Interests
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Beyond coding, here are some things that keep me inspired and balanced.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for hobby in hobbies %}
+            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}">
+                <div class="text-5xl mb-4">{{ hobby.icon }}</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">{{ hobby.name }}</h3>
+                <p class="text-gray-600">{{ hobby.description }}</p>
+            </div>
+            {% empty %}
+            <!-- Default hobbies if no data -->
+            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up">
+                <div class="text-5xl mb-4">🎵</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Music & Podcasts</h3>
+                <p class="text-gray-600">Love listening to music and tech podcasts while coding</p>
+            </div>
+            
+            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-5xl mb-4">🎨</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">UI Design</h3>
+                <p class="text-gray-600">Creating beautiful and intuitive user interfaces</p>
+            </div>
+            
+            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-5xl mb-4">🔬</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Experimenting with Tech</h3>
+                <p class="text-gray-600">Always trying new technologies and frameworks</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-20 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
+    <div class="max-w-4xl mx-auto text-center px-4" data-aos="fade-up">
+        <h2 class="text-4xl font-bold text-white mb-6">
+            Ready to Work Together?
+        </h2>
+        <p class="text-xl text-white/90 mb-8">
+            Let's discuss how we can collaborate on your next project or explore opportunities together.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'portfolio:contact' %}" class="bg-white text-blue-600 px-8 py-4 rounded-xl hover:bg-gray-100 transition-all duration-300 font-semibold text-lg shadow-lg">
+                <i class="fas fa-envelope mr-2"></i>Get In Touch
+            </a>
+            <a href="{% url 'portfolio:download_cv' %}" class="bg-white/20 text-white px-8 py-4 rounded-xl border border-white/30 hover:bg-white/30 transition-all duration-300 font-semibold text-lg">
+                <i class="fas fa-download mr-2"></i>Download CV
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

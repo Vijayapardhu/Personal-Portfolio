@@ -1,0 +1,327 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Vijaya Pardhu - Portfolio | Contact{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative py-32 overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-accent/20 to-accent4/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-br from-neon/15 to-neon2/15 rounded-full blur-2xl animate-float"></div>
+    </div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl md:text-7xl font-bold mb-8" data-aos="fade-up">
+            <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                Get In Touch
+            </span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+            Ready to start a conversation? Let's discuss your project, collaborate on something amazing, or just say hello!
+        </p>
+    </div>
+</section>
+
+<!-- Contact Information Section -->
+<section class="py-20 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Contact Details -->
+            <div class="space-y-8" data-aos="fade-right">
+                <div class="card">
+                    <h2 class="text-3xl font-bold text-white mb-6">
+                        <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                            Let's Connect
+                        </span>
+                    </h2>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                        I'm always excited to hear about new projects and opportunities. Whether you have a specific project in mind or just want to chat about technology, feel free to reach out!
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 group">
+                            <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-envelope text-xl text-white"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Email</div>
+                                <div class="text-white font-medium group-hover:text-primary transition-colors duration-300">
+                                    {% if contact_info %}{{ contact_info.email }}{% else %}vijayapardhu17@gmail.com{% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4 group">
+                            <div class="w-12 h-12 bg-gradient-to-br from-secondary to-accent rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i class="fab fa-github text-xl text-white"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">GitHub</div>
+                                <a href="https://github.com/Vijayapardhu" target="_blank" rel="noopener" class="text-white font-medium group-hover:text-secondary transition-colors duration-300 hover:underline">
+                                    github.com/Vijayapardhu
+                                </a>
+                            </div>
+                        </div>
+                        
+                        {% if contact_info and contact_info.phone %}
+                        <div class="flex items-center space-x-4 group">
+                            <div class="w-12 h-12 bg-gradient-to-br from-accent to-accent2 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-phone text-xl text-white"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Phone</div>
+                                <div class="text-white font-medium group-hover:text-accent transition-colors duration-300">
+                                    {{ contact_info.phone }}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if contact_info and contact_info.location %}
+                        <div class="flex items-center space-x-4 group">
+                            <div class="w-12 h-12 bg-gradient-to-br from-accent2 to-accent3 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <i class="fas fa-map-marker-alt text-xl text-white"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">Location</div>
+                                <div class="text-white font-medium group-hover:text-accent2 transition-colors duration-300">
+                                    {{ contact_info.location }}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form" data-aos="fade-left">
+                <h2 class="text-3xl font-bold text-white mb-6">
+                    <span class="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
+                        Send a Message
+                    </span>
+                </h2>
+                
+                <form id="contactForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                            <input type="text" id="name" name="name" required class="form-input w-full" placeholder="Your name">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required class="form-input w-full" placeholder="your.email@example.com">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+                        <input type="text" id="subject" name="subject" required class="form-input w-full" placeholder="What's this about?">
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                        <textarea id="message" name="message" rows="5" required class="form-input w-full resize-none" placeholder="Tell me about your project or just say hello!"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary w-full group">
+                        <span class="flex items-center justify-center">
+                            <i class="fas fa-paper-plane mr-2 group-hover:animate-bounce"></i>
+                            Send Message
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GitHub Stats Section -->
+<section class="py-20 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="bg-gradient-to-r from-accent2 via-accent3 to-accent4 bg-clip-text text-transparent">
+                    GitHub Activity
+                </span>
+            </h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Check out my coding activity and contributions on GitHub.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="stats-card group" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-users text-2xl text-white"></i>
+                </div>
+                <div class="text-3xl font-bold text-primary mb-2">
+                    {% if profile_stats %}{{ profile_stats.github_followers|default:"0" }}{% else %}0{% endif %}
+                </div>
+                <div class="text-gray-300">GitHub Followers</div>
+            </div>
+
+            <div class="stats-card group" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-16 h-16 bg-gradient-to-br from-secondary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-star text-2xl text-white"></i>
+                </div>
+                <div class="text-3xl font-bold text-secondary mb-2">
+                    {% if profile_stats %}{{ profile_stats.github_stars|default:"0" }}{% else %}0{% endif %}
+                </div>
+                <div class="text-gray-300">GitHub Stars</div>
+            </div>
+
+            <div class="stats-card group" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-16 h-16 bg-gradient-to-br from-accent to-accent2 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-code-branch text-2xl text-white"></i>
+                </div>
+                <div class="text-3xl font-bold text-accent mb-2">
+                    {% if profile_stats %}{{ profile_stats.github_repos|default:"0" }}{% else %}0{% endif %}
+                </div>
+                <div class="text-gray-300">GitHub Repositories</div>
+            </div>
+        </div>
+
+        <!-- GitHub Charts -->
+        <div class="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="github-stats" data-aos="fade-up" data-aos-delay="400">
+                <h3 class="text-2xl font-bold text-white mb-6 text-center">GitHub Stats</h3>
+                <div class="bg-gradient-to-br from-primary/20 to-secondary/20 rounded-xl p-6 text-center">
+                    <img src="https://github-readme-stats.vercel.app/api?username=Vijayapardhu&show_icons=true&theme=radical&hide_border=true" alt="GitHub Stats" class="w-full max-w-md mx-auto">
+                </div>
+            </div>
+
+            <div class="github-stats" data-aos="fade-up" data-aos-delay="500">
+                <h3 class="text-2xl font-bold text-white mb-6 text-center">Top Languages</h3>
+                <div class="bg-gradient-to-br from-secondary/20 to-accent/20 rounded-xl p-6 text-center">
+                    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vijayapardhu&layout=compact&theme=radical&hide_border=true" alt="Top Languages" class="w-full max-w-md mx-auto">
+                </div>
+            </div>
+        </div>
+
+        <!-- GitHub Streak -->
+        <div class="mt-16" data-aos="fade-up" data-aos-delay="600">
+            <div class="github-stats text-center">
+                <h3 class="text-2xl font-bold text-white mb-6">GitHub Streak</h3>
+                <div class="bg-gradient-to-br from-accent/20 to-accent2/20 rounded-xl p-6">
+                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=Vijayapardhu&theme=radical&hide_border=true" alt="GitHub Streak" class="w-full max-w-2xl mx-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Links Section -->
+<section class="py-20 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="bg-gradient-to-r from-accent4 via-accent5 to-primary bg-clip-text text-transparent">
+                    Quick Links
+                </span>
+            </h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Explore more of my work and get to know me better.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <a href="{% url 'portfolio:projects' %}" class="card group hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-code text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3 text-center">View Projects</h3>
+                <p class="text-gray-300 text-center leading-relaxed">
+                    Explore my portfolio of Android apps, web applications, and automation tools.
+                </p>
+            </a>
+
+            <a href="{% url 'portfolio:about' %}" class="card group hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-16 h-16 bg-gradient-to-br from-secondary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-user text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3 text-center">About Me</h3>
+                <p class="text-gray-300 text-center leading-relaxed">
+                    Learn more about my background, skills, and career objectives.
+                </p>
+            </a>
+
+            <a href="{% url 'portfolio:download_cv' %}" class="card group hover:scale-105 transition-transform duration-300" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-16 h-16 bg-gradient-to-br from-accent to-accent2 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <i class="fas fa-download text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3 text-center">Download CV</h3>
+                <p class="text-gray-300 text-center leading-relaxed">
+                    Get my professional resume with all the details about my experience and skills.
+                </p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="py-20 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="card" data-aos="zoom-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                Ready to Start Something Amazing?
+            </h2>
+            <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                Whether you have a project idea, want to collaborate, or just want to say hello, I'd love to hear from you!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="mailto:{% if contact_info %}{{ contact_info.email }}{% else %}vijayapardhu17@gmail.com{% endif %}" class="btn-primary group">
+                    <span class="flex items-center justify-center">
+                        <i class="fas fa-envelope mr-2 group-hover:animate-bounce"></i>
+                        Send Email
+                    </span>
+                </a>
+                <a href="https://github.com/Vijayapardhu" target="_blank" rel="noopener" class="btn-secondary group">
+                    <span class="flex items-center justify-center">
+                        <i class="fab fa-github mr-2 group-hover:animate-pulse"></i>
+                        Visit GitHub
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form JavaScript -->
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(this);
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    
+    // Show loading state
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+    submitBtn.disabled = true;
+    
+    // Simulate form submission (replace with actual form handling)
+    setTimeout(() => {
+        // Show success message
+        submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Message Sent!';
+        submitBtn.classList.remove('btn-primary');
+        submitBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+        
+        // Reset form
+        this.reset();
+        
+        // Reset button after 3 seconds
+        setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+            submitBtn.classList.add('btn-primary');
+        }, 3000);
+    }, 2000);
+});
+</script>
+{% endblock %}

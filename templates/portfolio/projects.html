@@ -1,0 +1,311 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects - Vijaya Pardhu{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-20">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6" data-aos="fade-down">
+            My <span class="text-blue-600">Projects</span>
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            A collection of projects that showcase my skills, creativity, and passion for building meaningful solutions.
+        </p>
+    </div>
+</section>
+
+<!-- Filters Section -->
+<section class="py-12 bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-wrap items-center justify-center gap-4" data-aos="fade-up">
+            <button class="filter-btn active bg-blue-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300" data-filter="all">
+                All Projects
+            </button>
+            {% for type in project_types %}
+            <button class="filter-btn bg-gray-100 text-gray-700 px-6 py-3 rounded-xl font-medium hover:bg-gray-200 transition-all duration-300" data-filter="{{ type.0 }}">
+                {{ type.1 }}
+            </button>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Projects Grid -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+            {% for project in projects %}
+            <div class="project-card bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}" data-type="{{ project.project_type }}">
+                <!-- Project Image -->
+                {% if project.image %}
+                <div class="h-48 bg-gray-200 overflow-hidden">
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300">
+                </div>
+                {% else %}
+                <div class="h-48 bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
+                    <i class="{{ project.icon }} text-6xl text-blue-600"></i>
+                </div>
+                {% endif %}
+                
+                <!-- Project Content -->
+                <div class="p-6">
+                    <!-- Project Header -->
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium capitalize">
+                                {{ project.project_type }}
+                            </span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium capitalize">
+                                {{ project.difficulty_level }}
+                            </span>
+                        </div>
+                        {% if project.featured %}
+                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium">
+                            ⭐ Featured
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Project Title & Description -->
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">{{ project.title }}</h3>
+                    <p class="text-gray-600 mb-4">{{ project.short_description }}</p>
+                    
+                    <!-- Technologies -->
+                    <div class="mb-4">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-2">Technologies:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            {% for tech in project.technologies|slice:":4" %}
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">{{ tech }}</span>
+                            {% endfor %}
+                            {% if project.technologies|length > 4 %}
+                            <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs">+{{ project.technologies|length|add:"-4" }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Project Stats -->
+                    <div class="flex items-center justify-between mb-4 text-sm text-gray-500">
+                        {% if project.completed_date %}
+                        <span>Completed: {{ project.completed_date|date:"M Y" }}</span>
+                        {% endif %}
+                        {% if project.stars > 0 or project.forks > 0 %}
+                        <div class="flex items-center space-x-3">
+                            {% if project.stars > 0 %}
+                            <span class="flex items-center">
+                                <i class="fas fa-star text-yellow-500 mr-1"></i>
+                                {{ project.stars }}
+                            </span>
+                            {% endif %}
+                            {% if project.forks > 0 %}
+                            <span class="flex items-center">
+                                <i class="fas fa-code-branch text-blue-500 mr-1"></i>
+                                {{ project.forks }}
+                            </span>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Project Actions -->
+                    <div class="flex items-center justify-between">
+                        {% if project.github_url %}
+                        <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm font-medium flex items-center">
+                            <i class="fab fa-github mr-2"></i>View Code
+                        </a>
+                        {% endif %}
+                        {% if project.live_url %}
+                        <a href="{{ project.live_url }}" target="_blank" rel="noopener" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all duration-300 text-sm font-medium flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Default projects if no data -->
+            <div class="project-card bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-type="android">
+                <div class="h-48 bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center">
+                    <i class="fas fa-robot text-6xl text-blue-600"></i>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium capitalize">Android App</span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium capitalize">Advanced</span>
+                        </div>
+                        <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium">⭐ Featured</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">HeySara - AI Assistant App</h3>
+                    <p class="text-gray-600 mb-4">An intelligent AI-powered personal assistant app for Android with voice recognition and natural language processing.</p>
+                    <div class="mb-4">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-2">Technologies:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Kotlin</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Firebase</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">AI</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">ML Kit</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between mb-4 text-sm text-gray-500">
+                        <span>Completed: Dec 2024</span>
+                        <div class="flex items-center space-x-3">
+                            <span class="flex items-center">
+                                <i class="fas fa-star text-yellow-500 mr-1"></i>
+                                12
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-code-branch text-blue-500 mr-1"></i>
+                                5
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm font-medium flex items-center">
+                            <i class="fab fa-github mr-2"></i>View Code
+                        </a>
+                        <a href="#" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all duration-300 text-sm font-medium flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="100" data-type="web">
+                <div class="h-48 bg-gradient-to-br from-green-100 to-blue-100 flex items-center justify-center">
+                    <i class="fas fa-church text-6xl text-green-600"></i>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium capitalize">Web Application</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium capitalize">Intermediate</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Church Management System</h3>
+                    <p class="text-gray-600 mb-4">Comprehensive church management solution with member registration, event management, and communication tools.</p>
+                    <div class="mb-4">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-2">Technologies:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Django</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Python</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">MySQL</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Bootstrap</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between mb-4 text-sm text-gray-500">
+                        <span>Completed: Nov 2024</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm font-medium flex items-center">
+                            <i class="fab fa-github mr-2"></i>View Code
+                        </a>
+                        <a href="#" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all duration-300 text-sm font-medium flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="200" data-type="web">
+                <div class="h-48 bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
+                    <i class="fas fa-plane text-6xl text-purple-600"></i>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium capitalize">Web Application</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium capitalize">Intermediate</span>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Tourism Management System</h3>
+                    <p class="text-gray-600 mb-4">Complete tourism booking platform with hotel bookings, tour packages, and payment processing.</p>
+                    <div class="mb-4">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-2">Technologies:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">PHP</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">MySQL</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Bootstrap</span>
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">jQuery</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between mb-4 text-sm text-gray-500">
+                        <span>Completed: Oct 2024</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm font-medium flex items-center">
+                            <i class="fab fa-github mr-2"></i>View Code
+                        </a>
+                        <a href="#" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all duration-300 text-sm font-medium flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-20 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
+    <div class="max-w-4xl mx-auto text-center px-4" data-aos="fade-up">
+        <h2 class="text-4xl font-bold text-white mb-6">
+            Have a Project in Mind?
+        </h2>
+        <p class="text-xl text-white/90 mb-8">
+            Let's discuss how we can work together to bring your ideas to life.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'portfolio:contact' %}" class="bg-white text-blue-600 px-8 py-4 rounded-xl hover:bg-gray-100 transition-all duration-300 font-semibold text-lg shadow-lg">
+                <i class="fas fa-envelope mr-2"></i>Get In Touch
+            </a>
+            <a href="{% url 'portfolio:about' %}" class="bg-white/20 text-white px-8 py-4 rounded-xl border border-white/30 hover:bg-white/30 transition-all duration-300 font-semibold text-lg">
+                <i class="fas fa-user mr-2"></i>Learn More About Me
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Project Filter Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterBtns.forEach(b => b.classList.remove('active', 'bg-blue-600', 'text-white'));
+            filterBtns.forEach(b => b.classList.add('bg-gray-100', 'text-gray-700'));
+            
+            // Add active class to clicked button
+            this.classList.remove('bg-gray-100', 'text-gray-700');
+            this.classList.add('active', 'bg-blue-600', 'text-white');
+            
+            const filter = this.getAttribute('data-filter');
+            
+            projectCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-type') === filter) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.5s ease-in-out';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+
+// Add fadeIn animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+`;
+document.head.appendChild(style);
+</script>
+{% endblock %}

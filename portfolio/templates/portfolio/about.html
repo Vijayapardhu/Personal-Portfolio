@@ -1,0 +1,451 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Vijaya Pardhu - Portfolio | About{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative py-32 overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-accent/20 to-accent4/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-br from-neon/15 to-neon2/15 rounded-full blur-2xl animate-float"></div>
+    </div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl md:text-7xl font-bold mb-8" data-aos="fade-up">
+            <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                About Me
+            </span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+            Passionate about building meaningful technology solutions that address real-world problems. 
+            From college management systems to church applications, I create apps that make a difference.
+        </p>
+    </div>
+</section>
+
+<!-- Education Section -->
+<section class="py-20 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                    Education Journey
+                </span>
+            </h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                My academic path and continuous learning in the field of computer engineering.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {% if education %}
+                {% for edu in education %}
+                <div class="card card-3d group" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                    <div class="flex items-start space-x-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-white mb-2">{{ edu.degree }}</h3>
+                            <p class="text-lg text-gray-300 mb-3">{{ edu.institution }}</p>
+                            <p class="text-gray-400 mb-4">{{ edu.duration }}</p>
+                            {% if edu.current_score %}
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm text-gray-400">Current Score</span>
+                                    <span class="text-lg font-bold text-primary">{{ edu.current_score }}%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: {{ edu.current_score }}%" data-progress="{{ edu.current_score }}%"></div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if edu.description %}
+                            <p class="text-gray-300 leading-relaxed">{{ edu.description }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Default Education Card -->
+                <div class="card card-3d group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-start space-x-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-white mb-2">Diploma in Computer Engineering</h3>
+                            <p class="text-lg text-gray-300 mb-3">Aditya College of Engineering, Surampalem</p>
+                            <p class="text-gray-400 mb-4">2023 - 2026</p>
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm text-gray-400">Current Score</span>
+                                    <span class="text-lg font-bold text-primary">76%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 76%" data-progress="76%"></div>
+                                </div>
+                            </div>
+                            <p class="text-gray-300 leading-relaxed">
+                                Currently pursuing computer engineering with focus on software development, 
+                                database management, and modern web technologies.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Technical Skills Section -->
+<section class="py-20 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="bg-gradient-to-r from-secondary via-accent to-accent2 bg-clip-text text-transparent">
+                    Technical Skills
+                </span>
+            </h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                My expertise across various technologies and programming languages.
+            </p>
+        </div>
+
+        {% if skills %}
+            <!-- Group skills by category -->
+            {% regroup skills by category as skill_categories %}
+            <div class="space-y-12">
+                {% for category in skill_categories %}
+                <div class="card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                    <h3 class="text-2xl font-bold text-white mb-6 text-center">
+                        <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                            {{ category.grouper }}
+                        </span>
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {% for skill in category.list %}
+                        <div class="text-center group">
+                            <div class="w-20 h-20 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-primary/40 group-hover:to-secondary/40">
+                                <i class="fas fa-code text-2xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                            </div>
+                            <div class="text-sm text-gray-300 font-medium mb-2">{{ skill.name }}</div>
+                            {% if skill.proficiency %}
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: {{ skill.proficiency }}%" data-progress="{{ skill.proficiency }}%"></div>
+                            </div>
+                            <div class="text-xs text-gray-400 mt-1">{{ skill.proficiency }}%</div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- Default Skills -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Programming Languages -->
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-2xl font-bold text-white mb-6 text-center">
+                        <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                            Programming Languages
+                        </span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Java</span>
+                            <div class="w-24 progress-bar">
+                                <div class="progress-fill" style="width: 85%" data-progress="85%"></div>
+                            </div>
+                            <span class="text-primary font-bold">85%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Kotlin</span>
+                            <div class="w-24 progress-bar">
+                                <div class="progress-fill" style="width: 80%" data-progress="80%"></div>
+                            </div>
+                            <span class="text-secondary font-bold">80%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Python</span>
+                            <div class="w-24 progress-bar">
+                                <div class="progress-fill" style="width: 75%" data-progress="75%"></div>
+                            </div>
+                            <span class="text-accent font-bold">75%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">JavaScript</span>
+                            <div class="w-24 progress-bar">
+                                <div class="progress-fill" style="width: 70%" data-progress="70%"></div>
+                            </div>
+                            <span class="text-accent2 font-bold">70%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Development Tools -->
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl font-bold text-white mb-6 text-center">
+                        <span class="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
+                            Development Tools
+                        </span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Android Studio</span>
+                            <div class="w-24 progress-bar">
+                                <div class="progress-fill" style="width: 90%" data-progress="90%"></div>
+                            </div>
+                            <span class="text-primary font-bold">90%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Firebase</span>
+                            <div class="w-24 progress-bar">
+                                <div class="progress-fill" style="width: 85%" data-progress="85%"></div>
+                            </div>
+                            <span class="text-secondary font-bold">85%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Git</span>
+                            <div class="w-24 progress-bar">
+                                <div class="progress-fill" style="width: 80%" data-progress="80%"></div>
+                            </div>
+                            <span class="text-accent font-bold">80%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">VS Code</span>
+                            <div class="w-24 progress-bar">
+                                <div class="progress-fill" style="width: 85%" data-progress="85%"></div>
+                            </div>
+                            <span class="text-accent2 font-bold">85%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design Tools -->
+                <div class="card" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-2xl font-bold text-white mb-6 text-center">
+                        <span class="bg-gradient-to-r from-accent to-accent2 bg-clip-text text-transparent">
+                            Design Tools
+                        </span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Figma</span>
+                            <div class="w-24 progress-bar">
+                                <div class="progress-fill" style="width: 75%" data-progress="75%"></div>
+                            </div>
+                            <span class="text-primary font-bold">75%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Canva</span>
+                            <div class="w-24 progress-bar">
+                                <div class="progress-fill" style="width: 80%" data-progress="80%"></div>
+                            </div>
+                            <span class="text-secondary font-bold">80%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Adobe XD</span>
+                            <div class="w-24 progress-bar">
+                                <div class="progress-fill" style="width: 65%" data-progress="65%"></div>
+                            </div>
+                            <span class="text-accent font-bold">65%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Achievements Section -->
+<section class="py-20 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="bg-gradient-to-r from-accent2 via-accent3 to-accent4 bg-clip-text text-transparent">
+                    Achievements & Recognition
+                </span>
+            </h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Milestones and accomplishments that mark my journey in technology.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% if achievements %}
+                {% for achievement in achievements %}
+                <div class="achievement-card group" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-trophy text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">{{ achievement.title }}</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">{{ achievement.description }}</p>
+                    {% if achievement.date %}
+                    <div class="text-sm text-primary font-medium">{{ achievement.date }}</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Default Achievement Cards -->
+                <div class="achievement-card group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-trophy text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Top Student Developer</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">Recognized as the most innovative student developer in the Computer Engineering department.</p>
+                    <div class="text-sm text-primary font-medium">2024</div>
+                </div>
+
+                <div class="achievement-card group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-medal text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Best Android App</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">Won first place in the college's annual app development competition.</p>
+                    <div class="text-sm text-secondary font-medium">2023</div>
+                </div>
+
+                <div class="achievement-card group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-accent to-accent2 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-star text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Open Source Contributor</h3>
+                    <p class="text-gray-300 mb-4 leading-relaxed">Active contributor to various open-source projects on GitHub.</p>
+                    <div class="text-sm text-accent font-medium">Ongoing</div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Hobbies & Interests Section -->
+<section class="py-20 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                <span class="bg-gradient-to-r from-accent4 via-accent5 to-primary bg-clip-text text-transparent">
+                    Hobbies & Interests
+                </span>
+            </h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Beyond coding, here's what keeps me inspired and balanced.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% if hobbies %}
+                {% for hobby in hobbies %}
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                    <div class="w-20 h-20 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 group-hover:bg-gradient-to-br group-hover:from-primary/40 group-hover:to-secondary/40">
+                        <i class="fas fa-music text-2xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <div class="text-lg font-medium text-white">{{ hobby.name }}</div>
+                    {% if hobby.description %}
+                    <p class="text-sm text-gray-400 mt-2">{{ hobby.description }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Default Hobbies -->
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-20 h-20 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 group-hover:bg-gradient-to-br group-hover:from-primary/40 group-hover:to-secondary/40">
+                        <i class="fas fa-music text-2xl text-primary group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <div class="text-lg font-medium text-white">Music & Podcasts</div>
+                    <p class="text-sm text-gray-400 mt-2">Exploring new genres and tech podcasts</p>
+                </div>
+
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-20 h-20 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 group-hover:bg-gradient-to-br group-hover:from-secondary/40 group-hover:to-accent/40">
+                        <i class="fas fa-palette text-2xl text-secondary group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <div class="text-lg font-medium text-white">UI Design</div>
+                    <p class="text-sm text-gray-400 mt-2">Creating beautiful user interfaces</p>
+                </div>
+
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-20 h-20 bg-gradient-to-br from-accent/20 to-accent2/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 group-hover:bg-gradient-to-br group-hover:from-accent/40 group-hover:to-accent2/40">
+                        <i class="fas fa-flask text-2xl text-accent group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <div class="text-lg font-medium text-white">Tech Experiments</div>
+                    <p class="text-sm text-gray-400 mt-2">Trying new technologies</p>
+                </div>
+
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-20 h-20 bg-gradient-to-br from-accent2/20 to-accent3/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 group-hover:bg-gradient-to-br group-hover:from-accent2/40 group-hover:to-accent3/40">
+                        <i class="fas fa-book text-2xl text-accent2 group-hover:text-white transition-colors duration-300"></i>
+                    </div>
+                    <div class="text-lg font-medium text-white">Reading</div>
+                    <p class="text-sm text-gray-400 mt-2">Tech books and spiritual texts</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Career Goals Section -->
+<section class="py-20 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="card text-center" data-aos="zoom-in">
+            <div class="max-w-4xl mx-auto">
+                <div class="w-24 h-24 bg-gradient-to-br from-neon to-neon2 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse-slow">
+                    <i class="fas fa-rocket text-4xl text-white"></i>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
+                    Career Objectives
+                </h2>
+                <div class="text-xl text-gray-300 leading-relaxed space-y-4">
+                    <p>
+                        To become a <span class="text-gradient-primary font-semibold">Full-Stack Developer</span>, 
+                        skilled in <span class="text-gradient-secondary font-semibold">Android</span>, 
+                        <span class="text-gradient-accent font-semibold">Cloud</span>, and 
+                        <span class="text-gradient-primary font-semibold">Modern Web Technologies</span>.
+                    </p>
+                    <p>
+                        While contributing to <span class="text-gradient-secondary font-semibold">open-source projects</span> & 
+                        building <span class="text-gradient-accent font-semibold">meaningful technology solutions for society</span>.
+                    </p>
+                    <p>
+                        Focus on <span class="text-gradient-primary font-semibold">continuous learning</span> and 
+                        <span class="text-gradient-secondary font-semibold">innovation</span> in emerging technologies.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="py-20 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="card" data-aos="zoom-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                Ready to Work Together?
+            </h2>
+            <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                Let's discuss your project and see how we can create something amazing together.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'portfolio:contact' %}" class="btn-primary group">
+                    <span class="flex items-center justify-center">
+                        <i class="fas fa-envelope mr-2 group-hover:animate-bounce"></i>
+                        Get In Touch
+                    </span>
+                </a>
+                <a href="{% url 'portfolio:download_cv' %}" class="btn-secondary group">
+                    <span class="flex items-center justify-center">
+                        <i class="fas fa-download mr-2 group-hover:animate-pulse"></i>
+                        Download CV
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

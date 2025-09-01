@@ -1,0 +1,396 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Vijaya Pardhu - Portfolio | Projects{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative py-32 overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-accent/20 to-accent4/20 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-br from-neon/15 to-neon2/15 rounded-full blur-2xl animate-float"></div>
+    </div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl md:text-7xl font-bold mb-8" data-aos="fade-up">
+            <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                My Projects
+            </span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+            A collection of my work that showcases my skills, creativity, and passion for building meaningful technology solutions.
+        </p>
+    </div>
+</section>
+
+<!-- Project Filter Section -->
+<section class="py-12 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up">
+            <button class="project-filter active bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105" data-filter="all">
+                All Projects
+            </button>
+            <button class="project-filter bg-white/10 backdrop-blur-xl border border-white/20 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-gradient-to-r hover:from-primary hover:to-secondary" data-filter="android">
+                Android Apps
+            </button>
+            <button class="project-filter bg-white/10 backdrop-blur-xl border border-white/20 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-gradient-to-r hover:from-secondary hover:to-accent" data-filter="web">
+                Web Apps
+            </button>
+            <button class="project-filter bg-white/10 backdrop-blur-xl border border-white/20 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-gradient-to-r hover:from-accent hover:to-accent2" data-filter="automation">
+                Automation
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Grid Section -->
+<section class="py-20 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% if projects %}
+                {% for project in projects %}
+                <div class="project-card group" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}" data-category="{{ project.project_type|lower }}">
+                    {% if project.image %}
+                    <div class="relative overflow-hidden rounded-t-2xl">
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    {% else %}
+                    <div class="relative overflow-hidden rounded-t-2xl bg-gradient-to-br from-primary/20 to-secondary/20">
+                        <div class="w-full h-48 flex items-center justify-center">
+                            <i class="fas fa-code text-6xl text-primary/60"></i>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white group-hover:text-primary transition-colors duration-300">
+                                {{ project.title }}
+                            </h3>
+                            {% if project.featured %}
+                            <span class="bg-gradient-to-r from-neon to-neon2 text-white text-xs px-2 py-1 rounded-full font-medium">
+                                Featured
+                            </span>
+                            {% endif %}
+                        </div>
+                        
+                        <p class="text-gray-300 mb-4 leading-relaxed">{{ project.description }}</p>
+                        
+                        {% if project.technologies %}
+                        <div class="mb-4">
+                            <div class="flex flex-wrap gap-2">
+                                {% for tech in project.technologies %}
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">
+                                    {{ tech }}
+                                </span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            {% if project.github_url %}
+                            <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-2 px-4 rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fab fa-github mr-2"></i>
+                                View Code
+                            </a>
+                            {% endif %}
+                            
+                            {% if project.live_url %}
+                            <a href="{{ project.live_url }}" target="_blank" rel="noopener" class="flex-1 bg-gradient-to-r from-secondary to-accent text-white text-center py-2 px-4 rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                Live Demo
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Default Project Cards -->
+                <div class="project-card group" data-aos="fade-up" data-aos-delay="100" data-category="android">
+                    <div class="relative overflow-hidden rounded-t-2xl bg-gradient-to-br from-primary/20 to-secondary/20">
+                        <div class="w-full h-48 flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-6xl text-primary/60"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white group-hover:text-primary transition-colors duration-300">
+                                HeySara
+                            </h3>
+                            <span class="bg-gradient-to-r from-neon to-neon2 text-white text-xs px-2 py-1 rounded-full font-medium">
+                                Featured
+                            </span>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            AI-powered personal assistant app with natural language processing capabilities, 
+                            voice commands, and intelligent task automation.
+                        </p>
+                        
+                        <div class="mb-4">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">Kotlin</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">Firebase</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">ML Kit</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">Android</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="#" class="flex-1 bg-gradient-to-r from-primary to-secondary text-white text-center py-2 px-4 rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fab fa-github mr-2"></i>
+                                View Code
+                            </a>
+                            <a href="#" class="flex-1 bg-gradient-to-r from-secondary to-accent text-white text-center py-2 px-4 rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card group" data-aos="fade-up" data-aos-delay="200" data-category="android">
+                    <div class="relative overflow-hidden rounded-t-2xl bg-gradient-to-br from-secondary/20 to-accent/20">
+                        <div class="w-full h-48 flex items-center justify-center">
+                            <i class="fas fa-church text-6xl text-secondary/60"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white group-hover:text-secondary transition-colors duration-300">
+                                Church App
+                            </h3>
+                            <span class="bg-gradient-to-r from-neon to-neon2 text-white text-xs px-2 py-1 rounded-full font-medium">
+                                Featured
+                            </span>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            Comprehensive church management system with event scheduling, member management, 
+                            Bible readings, and prayer request features.
+                        </p>
+                        
+                        <div class="mb-4">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">Java</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">Firebase</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">SQLite</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">Android</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="#" class="flex-1 bg-gradient-to-r from-secondary to-accent text-white text-center py-2 px-4 rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fab fa-github mr-2"></i>
+                                View Code
+                            </a>
+                            <a href="#" class="flex-1 bg-gradient-to-r from-accent to-accent2 text-white text-center py-2 px-4 rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card group" data-aos="fade-up" data-aos-delay="300" data-category="web">
+                    <div class="relative overflow-hidden rounded-t-2xl bg-gradient-to-br from-accent/20 to-accent2/20">
+                        <div class="w-full h-48 flex items-center justify-center">
+                            <i class="fas fa-university text-6xl text-accent/60"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white group-hover:text-accent transition-colors duration-300">
+                                College Management System
+                            </h3>
+                            <span class="bg-gradient-to-r from-neon to-neon2 text-white text-xs px-2 py-1 rounded-full font-medium">
+                                Featured
+                            </span>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            Complete college management system with student, faculty, and course management, 
+                            attendance tracking, and grade management.
+                        </p>
+                        
+                        <div class="mb-4">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">PHP</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">MySQL</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">HTML/CSS</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">JavaScript</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="#" class="flex-1 bg-gradient-to-r from-accent to-accent2 text-white text-center py-2 px-4 rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fab fa-github mr-2"></i>
+                                View Code
+                            </a>
+                            <a href="#" class="flex-1 bg-gradient-to-r from-accent2 to-accent3 text-white text-center py-2 px-4 rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card group" data-aos="fade-up" data-aos-delay="400" data-category="web">
+                    <div class="relative overflow-hidden rounded-t-2xl bg-gradient-to-br from-accent2/20 to-accent3/20">
+                        <div class="w-full h-48 flex items-center justify-center">
+                            <i class="fas fa-globe text-6xl text-accent2/60"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white group-hover:text-accent2 transition-colors duration-300">
+                                Tourism Management System
+                            </h3>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            PHP-based tourism platform with admin and user dashboards, booking management, 
+                            destination information, and payment integration.
+                        </p>
+                        
+                        <div class="mb-4">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">PHP</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">MySQL</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">Bootstrap</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">jQuery</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="#" class="flex-1 bg-gradient-to-r from-accent2 to-accent3 text-white text-center py-2 px-4 rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fab fa-github mr-2"></i>
+                                View Code
+                            </a>
+                            <a href="#" class="flex-1 bg-gradient-to-r from-accent3 to-accent4 text-white text-center py-2 px-4 rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card group" data-aos="fade-up" data-aos-delay="500" data-category="automation">
+                    <div class="relative overflow-hidden rounded-t-2xl bg-gradient-to-br from-accent3/20 to-accent4/20">
+                        <div class="w-full h-48 flex items-center justify-center">
+                            <i class="fas fa-robot text-6xl text-accent3/60"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white group-hover:text-accent3 transition-colors duration-300">
+                                AI Automation Tools
+                            </h3>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            Collection of Python scripts and tools for automating repetitive tasks, 
+                            data processing, and workflow optimization using AI and machine learning.
+                        </p>
+                        
+                        <div class="mb-4">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">Python</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">OpenAI API</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">Selenium</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">Pandas</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="#" class="flex-1 bg-gradient-to-r from-accent3 to-accent4 text-white text-center py-2 px-4 rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fab fa-github mr-2"></i>
+                                View Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card group" data-aos="fade-up" data-aos-delay="600" data-category="web">
+                    <div class="relative overflow-hidden rounded-t-2xl bg-gradient-to-br from-accent4/20 to-accent5/20">
+                        <div class="w-full h-48 flex items-center justify-center">
+                            <i class="fas fa-clone text-6xl text-accent4/60"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-bold text-white group-hover:text-accent4 transition-colors duration-300">
+                                SBTET Results Clone
+                            </h3>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            Web application that replicates the SBTET results portal functionality, 
+                            providing students with easy access to their examination results.
+                        </p>
+                        
+                        <div class="mb-4">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">HTML</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">CSS</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">JavaScript</span>
+                                <span class="bg-white/10 text-white text-xs px-2 py-1 rounded-full">PHP</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="#" class="flex-1 bg-gradient-to-r from-accent4 to-accent5 text-white text-center py-2 px-4 rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fab fa-github mr-2"></i>
+                                View Code
+                            </a>
+                            <a href="#" class="flex-1 bg-gradient-to-r from-accent5 to-primary text-white text-center py-2 px-4 rounded-lg hover:from-neon hover:to-neon2 transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="py-20 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="card" data-aos="zoom-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                Have a Project in Mind?
+            </h2>
+            <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                Let's collaborate and create something amazing together. I'm always excited to work on new challenges!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'portfolio:contact' %}" class="btn-primary group">
+                    <span class="flex items-center justify-center">
+                        <i class="fas fa-envelope mr-2 group-hover:animate-bounce"></i>
+                        Get In Touch
+                    </span>
+                </a>
+                <a href="{% url 'portfolio:about' %}" class="btn-secondary group">
+                    <span class="flex items-center justify-center">
+                        <i class="fas fa-user mr-2 group-hover:animate-pulse"></i>
+                        Learn More About Me
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

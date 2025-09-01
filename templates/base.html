@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Vijaya Pardhu - Portfolio{% endblock %}</title>
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="Vijaya Pardhu - Student | Android & Web Developer | Firebase Enthusiast. Explore my projects, skills, and journey in technology.">
+    <meta name="keywords" content="Vijaya Pardhu, Android Developer, Web Developer, Firebase, Portfolio, Student Developer">
+    <meta name="author" content="Vijaya Pardhu">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Vijaya Pardhu - Portfolio">
+    <meta property="og:description" content="Student | Android & Web Developer | Firebase Enthusiast">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{% block og_url %}{% endblock %}">
+    
+    <!-- External CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vijaya Pardhu - Portfolio">
+    <meta name="twitter:description" content="Student | Android & Web Developer | Firebase Enthusiast">
+</head>
+<body class="bg-white text-gray-900 min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="{% url 'portfolio:home' %}" class="text-3xl font-bold text-blue-600 hover:text-indigo-600 transition-colors duration-300">
+                        MVP
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="{% url 'portfolio:home' %}" class="nav-link text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium">Home</a>
+                        <a href="{% url 'portfolio:about' %}" class="nav-link text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium">About</a>
+                        <a href="{% url 'portfolio:projects' %}" class="nav-link text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium">Projects</a>
+                        <a href="{% url 'portfolio:contact' %}" class="nav-link text-gray-700 hover:text-blue-600 transition-colors duration-300 font-medium">Contact</a>
+                        <a href="{% url 'portfolio:download_cv' %}" class="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold">
+                            Download CV
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button bg-gray-100 rounded-xl p-3 text-gray-600 hover:text-blue-600 hover:bg-gray-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div class="mobile-menu hidden md:hidden bg-white border-t border-gray-200 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="{% url 'portfolio:home' %}" class="mobile-nav-link block px-3 py-2 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-300 font-medium">Home</a>
+                <a href="{% url 'portfolio:about' %}" class="mobile-nav-link block px-3 py-2 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-300 font-medium">About</a>
+                <a href="{% url 'portfolio:projects' %}" class="mobile-nav-link block px-3 py-2 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-300 font-medium">Projects</a>
+                <a href="{% url 'portfolio:contact' %}" class="mobile-nav-link block px-3 py-2 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-300 font-medium">Contact</a>
+                <a href="{% url 'portfolio:download_cv' %}" class="mobile-nav-link block px-3 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors duration-300">
+                    Download CV
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- About -->
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-2xl font-bold mb-4 text-blue-400">Vijaya Pardhu</h3>
+                    <p class="text-gray-300 mb-4 text-lg">
+                        Student | Android & Web Developer | Firebase Enthusiast
+                    </p>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Building meaningful tech for society through code and innovation.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl font-bold mb-4 text-indigo-400">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'portfolio:home' %}" class="text-gray-300 hover:text-blue-400 transition-all duration-300 hover:translate-x-2 inline-block">Home</a></li>
+                        <li><a href="{% url 'portfolio:about' %}" class="text-gray-300 hover:text-indigo-400 transition-all duration-300 hover:translate-x-2 inline-block">About</a></li>
+                        <li><a href="{% url 'portfolio:projects' %}" class="text-gray-300 hover:text-green-400 transition-all duration-300 hover:translate-x-2 inline-block">Projects</a></li>
+                        <li><a href="{% url 'portfolio:contact' %}" class="text-gray-300 hover:text-purple-400 transition-all duration-300 hover:translate-x-2 inline-block">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-2xl font-bold mb-4 text-green-400">Get In Touch</h3>
+                    <div class="space-y-3">
+                        <p class="text-gray-300 group cursor-pointer">
+                            <i class="fas fa-envelope mr-3 text-blue-400 group-hover:text-blue-300 transition-colors duration-300"></i>
+                            <span class="group-hover:text-blue-300 transition-colors duration-300">vijayapardhu17@gmail.com</span>
+                        </p>
+                        <p class="text-gray-300 group">
+                            <i class="fab fa-github mr-3 text-indigo-400 group-hover:text-indigo-300 transition-colors duration-300"></i>
+                            <a href="https://github.com/Vijayapardhu" target="_blank" rel="noopener" class="group-hover:text-indigo-300 transition-colors duration-300 hover:underline">
+                                github.com/Vijayapardhu
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center" data-aos="fade-up" data-aos-delay="400">
+                <p class="text-gray-400">
+                    © {% now "Y" %} Vijaya Pardhu. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition-all duration-300 opacity-0 invisible transform scale-75 hover:scale-100 z-50" title="Back to top" aria-label="Back to top">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
