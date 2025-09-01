@@ -26,7 +26,7 @@ python manage.py populate_data
 echo "👤 Setting up superuser account..."
 if [ -z "$DJANGO_SUPERUSER_PASSWORD" ]; then
     echo "⚠️  DJANGO_SUPERUSER_PASSWORD not set, using default password"
-    export DJANGO_SUPERUSER_PASSWORD="vijayapardhu2024!"
+    export DJANGO_SUPERUSER_PASSWORD="vijayapardhu2025"
 fi
 
 python manage.py create_render_superuser \

@@ -24,7 +24,7 @@ REM Create superuser if it doesn't exist
 echo 👤 Setting up superuser account...
 if "%DJANGO_SUPERUSER_PASSWORD%"=="" (
     echo ⚠️  DJANGO_SUPERUSER_PASSWORD not set, using default password
-    set DJANGO_SUPERUSER_PASSWORD=vijayapardhu2024!
+    set DJANGO_SUPERUSER_PASSWORD=vijayapardhu2025
 )
 
 python manage.py create_render_superuser --username vijayapardhu --email vijaypardhu17@gmail.com
