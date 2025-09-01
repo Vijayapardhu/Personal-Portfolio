@@ -23,10 +23,10 @@
 </section>
 
 <!-- Education Section -->
-{% if education %}
 <section class="py-16 px-4 bg-white">
     <div class="max-w-7xl mx-auto">
         <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">🎓 Education</h2>
+        {% if education %}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             {% for edu in education %}
             <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}">
@@ -59,15 +59,55 @@
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <!-- Fallback Education -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Bachelor of Technology in Computer Science</h3>
+                    <p class="text-xl text-gray-700 mb-2">Aditya Engineering College</p>
+                    <p class="text-gray-600 mb-4">Surampalem, Andhra Pradesh, India</p>
+                    <div class="flex items-center justify-center gap-4 mb-4">
+                        <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-semibold">
+                            2021 - Present
+                        </span>
+                        <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-semibold">
+                            Current Score: 85%
+                        </span>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <p class="text-gray-700 leading-relaxed">Pursuing Computer Science with focus on software development and emerging technologies.</p>
+                </div>
+            </div>
+            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Intermediate (12th)</h3>
+                    <p class="text-xl text-gray-700 mb-2">Sri Chaitanya Junior College</p>
+                    <p class="text-gray-600 mb-4">Vijayawada, Andhra Pradesh, India</p>
+                    <div class="flex items-center justify-center gap-4 mb-4">
+                        <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-semibold">
+                            2019 - 2021
+                        </span>
+                        <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full font-semibold">
+                            Score: 92%
+                        </span>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <p class="text-gray-700 leading-relaxed">Science stream with Mathematics, Physics, and Chemistry.</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </section>
-{% endif %}
 
 <!-- Experience Section -->
-{% if experience %}
 <section class="py-16 px-4 bg-gray-50">
     <div class="max-w-7xl mx-auto">
         <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">💼 Experience</h2>
+        {% if experience %}
         <div class="space-y-8">
             {% for exp in experience %}
             <div class="bg-white rounded-2xl p-8 shadow-lg" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}">
@@ -99,16 +139,69 @@
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <!-- Fallback Experience -->
+        <div class="space-y-8">
+            <div class="bg-white rounded-2xl p-8 shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Freelance Developer</h3>
+                        <p class="text-xl text-gray-700 mb-2">Self-Employed</p>
+                        <p class="text-gray-600">Remote</p>
+                    </div>
+                    <div class="mt-4 md:mt-0">
+                        <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-semibold">
+                            Jan 2023 - Present
+                        </span>
+                    </div>
+                </div>
+                <p class="text-gray-700 leading-relaxed">Working on various client projects including web applications, mobile apps, and API development. Specializing in Django, Android, and Firebase solutions.</p>
+                <div class="mt-6">
+                    <p class="text-sm text-gray-500 mb-3">Technologies Used:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Django</span>
+                        <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Android</span>
+                        <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Firebase</span>
+                        <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Python</span>
+                        <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Java</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl p-8 shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Student Developer</h3>
+                        <p class="text-xl text-gray-700 mb-2">Google Developer Student Club</p>
+                        <p class="text-gray-600">Aditya Engineering College</p>
+                    </div>
+                    <div class="mt-4 md:mt-0">
+                        <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-semibold">
+                            Aug 2022 - Present
+                        </span>
+                    </div>
+                </div>
+                <p class="text-gray-700 leading-relaxed">Active member contributing to community projects, organizing workshops, and mentoring fellow students in mobile and web development.</p>
+                <div class="mt-6">
+                    <p class="text-sm text-gray-500 mb-3">Technologies Used:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Android</span>
+                        <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Firebase</span>
+                        <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">Git</span>
+                        <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">GitHub</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </section>
-{% endif %}
 
 <!-- Skills Section -->
-{% if skills %}
 <section class="py-16 px-4 bg-white">
     <div class="max-w-7xl mx-auto">
         <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">💻 Technical Skills</h2>
         
+        {% if skills %}
         <!-- Skills by Category -->
         <div class="space-y-12">
             {% regroup skills by category as skill_categories %}
@@ -135,15 +228,89 @@
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <!-- Fallback Skills -->
+        <div class="space-y-12">
+            <div data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Programming Languages</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-semibold text-gray-900">Python</span>
+                            <span class="text-blue-600 font-bold">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3 mb-3">
+                            <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-3 rounded-full transition-all duration-500" style="width: 90%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">Core programming language for web and automation</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-semibold text-gray-900">Java</span>
+                            <span class="text-blue-600 font-bold">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3 mb-3">
+                            <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-3 rounded-full transition-all duration-500" style="width: 85%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">Primary language for Android development</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-semibold text-gray-900">JavaScript</span>
+                            <span class="text-blue-600 font-bold">75%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3 mb-3">
+                            <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-3 rounded-full transition-all duration-500" style="width: 75%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">Frontend development and web interactivity</p>
+                    </div>
+                </div>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="200">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Frameworks & Tools</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-semibold text-gray-900">Django</span>
+                            <span class="text-blue-600 font-bold">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3 mb-3">
+                            <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-3 rounded-full transition-all duration-500" style="width: 85%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">Full-stack web framework for rapid development</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-semibold text-gray-900">Firebase</span>
+                            <span class="text-blue-600 font-bold">80%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3 mb-3">
+                            <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-3 rounded-full transition-all duration-500" style="width: 80%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">Backend services and real-time database</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-semibold text-gray-900">Git</span>
+                            <span class="text-blue-600 font-bold">80%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3 mb-3">
+                            <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-3 rounded-full transition-all duration-500" style="width: 80%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600">Version control and collaboration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </section>
-{% endif %}
 
 <!-- Certifications Section -->
-{% if certifications %}
 <section class="py-16 px-4 bg-gray-50">
     <div class="max-w-7xl mx-auto">
         <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">🏆 Certifications</h2>
+        {% if certifications %}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for cert in certifications %}
             <div class="bg-white rounded-2xl p-6 shadow-lg text-center transform hover:scale-105 transition-all duration-300" 
@@ -169,9 +336,34 @@
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <!-- Fallback Certifications -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white rounded-2xl p-6 shadow-lg text-center transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-4xl mb-4">🎓</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Google Developer Certification</h3>
+                <p class="text-gray-700 mb-3">Google</p>
+                <p class="text-gray-600 mb-4">Dec 2023</p>
+                <p class="text-sm text-gray-500">ID: GDSC-2023-001</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-lg text-center transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-4xl mb-4">🎓</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Django Web Development</h3>
+                <p class="text-gray-700 mb-3">Coursera</p>
+                <p class="text-gray-600 mb-4">Nov 2023</p>
+                <p class="text-sm text-gray-500">ID: COURSERA-DJANGO-001</p>
+            </div>
+            <div class="bg-white rounded-2xl p-6 shadow-lg text-center transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-4xl mb-4">🎓</div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Android App Development</h3>
+                <p class="text-gray-700 mb-3">Udacity</p>
+                <p class="text-gray-600 mb-4">Oct 2023</p>
+                <p class="text-sm text-gray-500">ID: UDACITY-ANDROID-001</p>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </section>
-{% endif %}
 
 <!-- Goals Section -->
 <section class="py-16 px-4 bg-white">
@@ -194,10 +386,10 @@
 </section>
 
 <!-- Personal Interests Section -->
-{% if hobbies %}
 <section class="py-16 px-4 bg-gray-50">
     <div class="max-w-7xl mx-auto">
         <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">🎨 Personal Interests</h2>
+        {% if hobbies %}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {% for hobby in hobbies %}
             <div class="bg-white p-6 rounded-2xl text-center shadow-lg transform hover:scale-105 transition-all duration-300" 
@@ -208,9 +400,33 @@
             </div>
             {% endfor %}
         </div>
+        {% else %}
+        <!-- Fallback Hobbies -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-2xl text-center shadow-lg transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-3xl mb-4">📱</div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Mobile Development</h3>
+                <p class="text-gray-600 text-sm">Exploring new Android features and building innovative apps</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl text-center shadow-lg transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-3xl mb-4">🌐</div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Web Technologies</h3>
+                <p class="text-gray-600 text-sm">Learning modern web frameworks and staying updated with trends</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl text-center shadow-lg transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-3xl mb-4">📚</div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Reading</h3>
+                <p class="text-gray-600 text-sm">Tech blogs, programming books, and industry publications</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl text-center shadow-lg transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                <div class="text-3xl mb-4">🎵</div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Music</h3>
+                <p class="text-gray-600 text-sm">Listening to various genres while coding and relaxing</p>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </section>
-{% endif %}
 
 <!-- Call to Action Section -->
 <section class="py-20 px-4 bg-gradient-to-r from-indigo-600 to-purple-600">

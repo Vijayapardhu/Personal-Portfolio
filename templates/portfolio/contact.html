@@ -23,7 +23,6 @@
 </section>
 
 <!-- Contact Information Section -->
-{% if contact_info %}
 <section class="py-16 px-4 bg-white">
     <div class="max-w-7xl mx-auto">
         <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">📞 Contact Information</h2>
@@ -33,33 +32,47 @@
             <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl text-center border border-blue-200" data-aos="fade-up" data-aos-delay="100">
                 <div class="text-4xl mb-4">📧</div>
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Email</h3>
+                {% if contact_info and contact_info.email %}
                 <p class="text-gray-700 mb-3">{{ contact_info.email }}</p>
                 <a href="mailto:{{ contact_info.email }}" class="text-blue-600 hover:text-blue-800 font-medium">
                     Send Email
                 </a>
+                {% else %}
+                <p class="text-gray-700 mb-3">vijayapardhu17@gmail.com</p>
+                <a href="mailto:vijayapardhu17@gmail.com" class="text-blue-600 hover:text-blue-800 font-medium">
+                    Send Email
+                </a>
+                {% endif %}
             </div>
 
             <!-- Phone -->
-            {% if contact_info.phone %}
             <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-2xl text-center border border-green-200" data-aos="fade-up" data-aos-delay="200">
                 <div class="text-4xl mb-4">📱</div>
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Phone</h3>
+                {% if contact_info and contact_info.phone %}
                 <p class="text-gray-700 mb-3">{{ contact_info.phone }}</p>
                 <a href="tel:{{ contact_info.phone }}" class="text-green-600 hover:text-green-800 font-medium">
                     Call Now
                 </a>
+                {% else %}
+                <p class="text-gray-700 mb-3">+91 98765 43210</p>
+                <a href="tel:+919876543210" class="text-green-600 hover:text-green-800 font-medium">
+                    Call Now
+                </a>
+                {% endif %}
             </div>
-            {% endif %}
 
             <!-- Location -->
-            {% if contact_info.location %}
             <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl text-center border border-purple-200" data-aos="fade-up" data-aos-delay="300">
                 <div class="text-4xl mb-4">📍</div>
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Location</h3>
+                {% if contact_info and contact_info.location %}
                 <p class="text-gray-700 mb-3">{{ contact_info.location }}</p>
+                {% else %}
+                <p class="text-gray-700 mb-3">Surampalem, Andhra Pradesh, India</p>
+                {% endif %}
                 <span class="text-purple-600 font-medium">Available for remote work</span>
             </div>
-            {% endif %}
 
             <!-- Availability -->
             <div class="bg-gradient-to-br from-orange-50 to-yellow-50 p-6 rounded-2xl text-center border border-orange-200" data-aos="fade-up" data-aos-delay="400">
@@ -71,7 +84,6 @@
         </div>
     </div>
 </section>
-{% endif %}
 
 <!-- Contact Form Section -->
 <section class="py-16 px-4 bg-gray-50">
@@ -144,7 +156,7 @@
             </div>
 
             <!-- LinkedIn -->
-            {% if contact_info.linkedin_url %}
+            {% if contact_info and contact_info.linkedin_url %}
             <div class="bg-blue-600 text-white p-6 rounded-2xl text-center transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
                 <div class="text-4xl mb-4">💼</div>
                 <h3 class="text-lg font-semibold mb-2">LinkedIn</h3>
@@ -157,7 +169,7 @@
             {% endif %}
 
             <!-- Twitter/X -->
-            {% if contact_info.twitter_url %}
+            {% if contact_info and contact_info.twitter_url %}
             <div class="bg-black text-white p-6 rounded-2xl text-center transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
                 <div class="text-4xl mb-4">🐦</div>
                 <h3 class="text-lg font-semibold mb-2">Twitter/X</h3>
@@ -194,8 +206,13 @@
                     <div class="text-4xl mb-4">📱</div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Direct Message</h3>
                     <p class="text-gray-600 mb-4">Send me a quick message on any platform</p>
-                    {% if contact_info.phone %}
+                    {% if contact_info and contact_info.phone %}
                     <a href="https://wa.me/{{ contact_info.phone|cut:' '|cut:'+'|cut:'-' }}" target="_blank" rel="noopener" 
+                       class="inline-block bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors duration-300 font-medium">
+                        WhatsApp
+                    </a>
+                    {% else %}
+                    <a href="https://wa.me/919876543210" target="_blank" rel="noopener" 
                        class="inline-block bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors duration-300 font-medium">
                         WhatsApp
                     </a>
@@ -206,8 +223,13 @@
                     <div class="text-4xl mb-4">📧</div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Email</h3>
                     <p class="text-gray-600 mb-4">For detailed discussions and proposals</p>
-                    {% if contact_info.email %}
+                    {% if contact_info and contact_info.email %}
                     <a href="mailto:{{ contact_info.email }}?subject=Portfolio%20Inquiry" 
+                       class="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300 font-medium">
+                        Send Email
+                    </a>
+                    {% else %}
+                    <a href="mailto:vijayapardhu17@gmail.com?subject=Portfolio%20Inquiry" 
                        class="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300 font-medium">
                         Send Email
                     </a>

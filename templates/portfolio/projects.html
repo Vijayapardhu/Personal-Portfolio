@@ -23,7 +23,6 @@
 </section>
 
 <!-- Projects Grid Section -->
-{% if projects %}
 <section class="py-16 px-4 bg-white">
     <div class="max-w-7xl mx-auto">
         <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">Featured Projects</h2>
@@ -33,7 +32,7 @@
             <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
                 <input type="text" id="projectSearch" placeholder="Search projects..." 
                        class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent w-full md:w-80">
-                <select id="projectFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                <select id="projectFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" aria-label="Filter projects by type">
                     <option value="">All Types</option>
                     <option value="Android">Android</option>
                     <option value="Web">Web</option>
@@ -44,6 +43,7 @@
         </div>
 
         <!-- Projects Grid -->
+        {% if projects %}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
             {% for project in projects %}
             <div class="project-card bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300 border border-gray-200" 
@@ -108,81 +108,115 @@
                     <div class="flex gap-3">
                         {% if project.github_url %}
                         <a href="{{ project.github_url }}" target="_blank" rel="noopener" 
-                           class="flex-1 bg-gray-800 text-white text-center py-2 px-4 rounded-lg hover:bg-gray-900 transition-colors duration-300 text-sm font-medium">
+                           class="flex-1 bg-gray-800 text-white text-center py-2 px-4 rounded-lg hover:bg-gray-900 transition-colors duration-300">
                             <i class="fab fa-github mr-2"></i>GitHub
                         </a>
                         {% endif %}
                         {% if project.live_url %}
                         <a href="{{ project.live_url }}" target="_blank" rel="noopener" 
-                           class="flex-1 bg-green-600 text-white text-center py-2 px-4 rounded-lg hover:bg-green-700 transition-colors duration-300 text-sm font-medium">
+                           class="flex-1 bg-green-600 text-white text-center py-2 px-4 rounded-lg hover:bg-green-700 transition-colors duration-300">
                             <i class="fas fa-external-link-alt mr-2"></i>Live Demo
                         </a>
                         {% endif %}
                     </div>
-
-                    <!-- Project Features -->
-                    {% if project.features %}
-                    <div class="mt-4 pt-4 border-t border-gray-200">
-                        <p class="text-sm text-gray-500 mb-2">Key Features:</p>
-                        <ul class="text-xs text-gray-600 space-y-1">
-                            {% for feature in project.features|slice:":3" %}
-                            <li class="flex items-center">
-                                <span class="text-green-500 mr-2">✓</span>
-                                {{ feature }}
-                            </li>
-                            {% endfor %}
-                            {% if project.features|length > 3 %}
-                            <li class="text-gray-400">+{{ project.features|length|add:"-3" }} more features</li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                    {% endif %}
                 </div>
             </div>
             {% endfor %}
         </div>
-
-        <!-- No Projects Message -->
-        <div id="noProjects" class="hidden text-center py-12">
-            <div class="text-6xl mb-4">🔍</div>
-            <h3 class="text-xl font-semibold text-gray-700 mb-2">No projects found</h3>
-            <p class="text-gray-500">Try adjusting your search or filter criteria.</p>
-        </div>
-    </div>
-</section>
-{% else %}
-<!-- No Projects Section -->
-<section class="py-16 px-4 bg-white">
-    <div class="max-w-4xl mx-auto text-center">
-        <div class="text-6xl mb-6">🚀</div>
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">Projects Coming Soon!</h2>
-        <p class="text-lg text-gray-600 mb-8">
-            I'm currently working on some exciting projects. Check back soon to see my latest work!
-        </p>
-        <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
-            <h3 class="text-xl font-semibold text-gray-800 mb-4">What I'm Working On:</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
-                <div class="flex items-center">
-                    <span class="text-green-500 mr-3">🔄</span>
-                    <span>Android App Development</span>
+        {% else %}
+        <!-- Fallback Projects -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projectsGrid">
+            <div class="project-card bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300 border border-gray-200" 
+                 data-aos="fade-up" data-aos-delay="100"
+                 data-type="android" data-title="task management app">
+                <div class="h-48 bg-gradient-to-br from-green-100 to-blue-100 flex items-center justify-center">
+                    <div class="text-6xl text-gray-400">📱</div>
                 </div>
-                <div class="flex items-center">
-                    <span class="text-blue-500 mr-3">🌐</span>
-                    <span>Web Applications</span>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Android</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">Intermediate</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Task Management App</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-3">A comprehensive task management application with Firebase backend, user authentication, and real-time updates.</p>
+                    <div class="mb-4">
+                        <p class="text-sm text-gray-500 mb-2">Technologies:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Android</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Firebase</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Java</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <a href="https://github.com/Vijayapardhu" target="_blank" rel="noopener" 
+                           class="flex-1 bg-gray-800 text-white text-center py-2 px-4 rounded-lg hover:bg-gray-900 transition-colors duration-300">
+                            <i class="fab fa-github mr-2"></i>GitHub
+                        </a>
+                    </div>
                 </div>
-                <div class="flex items-center">
-                    <span class="text-purple-500 mr-3">☁️</span>
-                    <span>Firebase Integration</span>
+            </div>
+            <div class="project-card bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300 border border-gray-200" 
+                 data-aos="fade-up" data-aos-delay="200"
+                 data-type="web" data-title="e-commerce platform">
+                <div class="h-48 bg-gradient-to-br from-green-100 to-blue-100 flex items-center justify-center">
+                    <div class="text-6xl text-gray-400">🌐</div>
                 </div>
-                <div class="flex items-center">
-                    <span class="text-orange-500 mr-3">🔌</span>
-                    <span>API Development</span>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Web</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">Advanced</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">E-Commerce Platform</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-3">Full-stack e-commerce solution built with Django, featuring user management, payment integration, and admin panel.</p>
+                    <div class="mb-4">
+                        <p class="text-sm text-gray-500 mb-2">Technologies:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Django</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Python</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">PostgreSQL</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <a href="https://github.com/Vijayapardhu" target="_blank" rel="noopener" 
+                           class="flex-1 bg-gray-800 text-white text-center py-2 px-4 rounded-lg hover:bg-gray-900 transition-colors duration-300">
+                            <i class="fab fa-github mr-2"></i>GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300 border border-gray-200" 
+                 data-aos="fade-up" data-aos-delay="300"
+                 data-type="api" data-title="weather api service">
+                <div class="h-48 bg-gradient-to-br from-green-100 to-blue-100 flex items-center justify-center">
+                    <div class="text-6xl text-gray-400">🔌</div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">API</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">Beginner</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Weather API Service</h3>
+                    <p class="text-gray-600 mb-4 line-clamp-3">RESTful API service that provides weather information with caching, rate limiting, and comprehensive documentation.</p>
+                    <div class="mb-4">
+                        <p class="text-sm text-gray-500 mb-2">Technologies:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">FastAPI</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Python</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Redis</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <a href="https://github.com/Vijayapardhu" target="_blank" rel="noopener" 
+                           class="flex-1 bg-gray-800 text-white text-center py-2 px-4 rounded-lg hover:bg-gray-900 transition-colors duration-300">
+                            <i class="fab fa-github mr-2"></i>GitHub
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 </section>
-{% endif %}
 
 <!-- GitHub Stats Section -->
 <section class="py-16 px-4 bg-gray-50">
@@ -250,13 +284,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('projectSearch');
     const filterSelect = document.getElementById('projectFilter');
     const projectsGrid = document.getElementById('projectsGrid');
-    const noProjects = document.getElementById('noProjects');
     const projectCards = document.querySelectorAll('.project-card');
 
     function filterProjects() {
         const searchTerm = searchInput.value.toLowerCase();
         const filterType = filterSelect.value.toLowerCase();
-        let visibleCount = 0;
 
         projectCards.forEach(card => {
             const title = card.dataset.title;
@@ -266,20 +298,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (matchesSearch && matchesFilter) {
                 card.style.display = 'block';
-                visibleCount++;
             } else {
                 card.style.display = 'none';
             }
         });
-
-        // Show/hide no projects message
-        if (visibleCount === 0) {
-            noProjects.classList.remove('hidden');
-            projectsGrid.classList.add('hidden');
-        } else {
-            noProjects.classList.add('hidden');
-            projectsGrid.classList.remove('hidden');
-        }
     }
 
     // Event listeners
