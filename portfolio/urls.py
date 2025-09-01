@@ -12,4 +12,5 @@ urlpatterns = [
     path('api/projects/', views.api_projects, name='api_projects'),
     path('api/achievements/', views.api_achievements, name='api_achievements'),
     path('api/update-stats/', views.update_stats, name='update_stats'),
+    path('debug/', views.debug_data, name='debug_data'),
 ]
