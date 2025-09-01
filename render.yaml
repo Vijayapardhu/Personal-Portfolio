@@ -3,7 +3,10 @@ services:
     name: vijaya-pardhu-portfolio
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --no-input
+      python manage.py migrate
     startCommand: gunicorn portfolio_website.wsgi:application
     envVars:
       - key: PYTHON_VERSION

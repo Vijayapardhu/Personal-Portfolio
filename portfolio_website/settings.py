@@ -136,6 +136,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Static files storage for production
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Ensure staticfiles directory exists
+if not os.path.exists(STATIC_ROOT):
+    os.makedirs(STATIC_ROOT)
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -153,3 +157,25 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
     X_FRAME_OPTIONS = 'DENY'
     SECURE_HSTS_PRELOAD = True
+
+# Logging configuration for production debugging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
