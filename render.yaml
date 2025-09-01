@@ -7,6 +7,8 @@ services:
       pip install -r requirements.txt
       python manage.py collectstatic --no-input
       python manage.py migrate
+      python manage.py populate_data || echo "Data population failed, continuing..."
+      python manage.py create_render_superuser --username vijayapardhu --email vijaypardhu17@gmail.com || echo "Superuser creation failed, continuing..."
     startCommand: gunicorn portfolio_website.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
@@ -23,6 +25,8 @@ services:
         value: false
       - key: PORT
         value: 10000
+      - key: DJANGO_SUPERUSER_PASSWORD
+        generateValue: true
       - key: DATABASE_URL
         fromDatabase:
           name: vijaya-pardhu-portfolio-db
