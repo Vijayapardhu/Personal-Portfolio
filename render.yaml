@@ -9,6 +9,7 @@ services:
       python manage.py migrate
       python manage.py populate_data || echo "Data population failed, continuing..."
       python manage.py create_render_superuser --username vijayapardhu --email vijaypardhu17@gmail.com || echo "Superuser creation failed, continuing..."
+      python manage.py create_render_superuser --username admin --email admin@example.com --password admin123 || echo "Admin user creation failed, continuing..."
     startCommand: gunicorn portfolio_website.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
