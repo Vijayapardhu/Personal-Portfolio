@@ -7,6 +7,8 @@ services:
       pip install -r requirements.txt
       python manage.py collectstatic --no-input
       python manage.py migrate
+      python manage.py populate_data
+      python manage.py create_render_superuser --username vijayapardhu --email vijaypardhu17@gmail.com
     startCommand: gunicorn portfolio_website.wsgi:application
     envVars:
       - key: PYTHON_VERSION
@@ -21,6 +23,8 @@ services:
         value: .onrender.com
       - key: DEBUG
         value: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        generateValue: true
       - key: DATABASE_URL
         fromDatabase:
           name: vijaya-pardhu-portfolio-db
