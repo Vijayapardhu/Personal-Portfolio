@@ -1,296 +1,298 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Contact - Vijaya Pardhu{% endblock %}
+{% block title %}Contact Me - Vijaya Pardhu{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
-<section class="bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-20">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6" data-aos="fade-down">
-            Get In <span class="text-blue-600">Touch</span>
-        </h1>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-            Ready to start a conversation? Let's discuss your next project or explore opportunities together.
-        </p>
+<section class="hero-section bg-gradient-to-br from-purple-50 via-white to-pink-50 py-20 px-4">
+    <div class="max-w-7xl mx-auto text-center">
+        <div data-aos="fade-up" data-aos-delay="100">
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
+                Get In <span class="text-purple-600">Touch</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto">
+                📧 Let's discuss your next project or just say hello! I'm always excited to connect with fellow developers and potential collaborators.
+            </p>
+            <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+                Whether you have a project idea, want to collaborate, or just want to chat about technology, 
+                I'd love to hear from you. Let's make something amazing together!
+            </p>
+        </div>
     </div>
 </section>
 
 <!-- Contact Information Section -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Contact Details -->
-            <div data-aos="fade-right">
-                <h2 class="text-3xl font-bold text-gray-900 mb-8">
-                    Let's <span class="text-blue-600">Connect</span>
-                </h2>
-                <p class="text-lg text-gray-600 mb-8">
-                    I'm always excited to hear about new opportunities and interesting projects. 
-                    Whether you want to discuss a collaboration, ask questions, or just say hello, 
-                    I'd love to hear from you!
-                </p>
-                
-                <div class="space-y-6">
-                    <!-- Email -->
-                    <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl border border-gray-200 hover:bg-gray-100 transition-all duration-300">
-                        <div class="text-2xl text-blue-600">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900">Email</h3>
-                            <p class="text-gray-600">vijayapardhu17@gmail.com</p>
-                        </div>
-                    </div>
-                    
-                    <!-- GitHub -->
-                    <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl border border-gray-200 hover:bg-gray-100 transition-all duration-300">
-                        <div class="text-2xl text-gray-900">
-                            <i class="fab fa-github"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900">GitHub</h3>
-                            <a href="https://github.com/Vijayapardhu" target="_blank" rel="noopener" class="text-blue-600 hover:text-blue-700 transition-colors duration-300">
-                                github.com/Vijayapardhu
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Location -->
-                    <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl border border-gray-200 hover:bg-gray-100 transition-all duration-300">
-                        <div class="text-2xl text-green-600">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900">Location</h3>
-                            <p class="text-gray-600">Surampalem, Andhra Pradesh, India</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Availability -->
-                    <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-xl border border-gray-200 hover:bg-gray-100 transition-all duration-300">
-                        <div class="text-2xl text-purple-600">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-gray-900">Availability</h3>
-                            <p class="text-gray-600">Open to new opportunities and collaborations</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Contact Form -->
-            <div data-aos="fade-left">
-                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Send a Message</h3>
-                    
-                    <form id="contactForm" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name *</label>
-                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject *</label>
-                            <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
-                        </div>
-                        
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
-                            <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-all duration-300 font-semibold text-lg transform hover:scale-105">
-                            <i class="fas fa-paper-plane mr-2"></i>Send Message
-                        </button>
-                    </form>
-                    
-                    <div id="formSuccess" class="hidden mt-4 p-4 bg-green-100 text-green-800 rounded-lg">
-                        <i class="fas fa-check-circle mr-2"></i>
-                        Thank you! Your message has been sent successfully.
-                    </div>
-                    
-                    <div id="formError" class="hidden mt-4 p-4 bg-red-100 text-red-800 rounded-lg">
-                        <i class="fas fa-exclamation-circle mr-2"></i>
-                        <span id="errorMessage">Something went wrong. Please try again.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- GitHub Stats Section -->
-<section class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-16" data-aos="fade-up">
-            <h2 class="text-4xl font-bold text-gray-900 mb-6">
-                <span class="text-blue-600">GitHub</span> Activity
-            </h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                Check out my coding activity and contributions on GitHub.
-            </p>
-        </div>
+{% if contact_info %}
+<section class="py-16 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">📞 Contact Information</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Profile Stats -->
-            <div class="bg-white rounded-2xl p-6 border border-gray-200 text-center hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
-                <div class="text-3xl font-bold text-blue-600 mb-2">{{ profile_stats.profile_views|default:"0" }}</div>
-                <div class="text-gray-600 font-medium">Profile Views</div>
+            <!-- Email -->
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl text-center border border-blue-200" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-4xl mb-4">📧</div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Email</h3>
+                <p class="text-gray-700 mb-3">{{ contact_info.email }}</p>
+                <a href="mailto:{{ contact_info.email }}" class="text-blue-600 hover:text-blue-800 font-medium">
+                    Send Email
+                </a>
             </div>
-            
-            <div class="bg-white rounded-2xl p-6 border border-gray-200 text-center hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
-                <div class="text-3xl font-bold text-indigo-600 mb-2">{{ profile_stats.github_followers|default:"25" }}</div>
-                <div class="text-gray-600 font-medium">GitHub Followers</div>
+
+            <!-- Phone -->
+            {% if contact_info.phone %}
+            <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-2xl text-center border border-green-200" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-4xl mb-4">📱</div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Phone</h3>
+                <p class="text-gray-700 mb-3">{{ contact_info.phone }}</p>
+                <a href="tel:{{ contact_info.phone }}" class="text-green-600 hover:text-green-800 font-medium">
+                    Call Now
+                </a>
             </div>
-            
-            <div class="bg-white rounded-2xl p-6 border border-gray-200 text-center hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
-                <div class="text-3xl font-bold text-green-600 mb-2">{{ profile_stats.github_stars|default:"15" }}</div>
-                <div class="text-gray-600 font-medium">GitHub Stars</div>
+            {% endif %}
+
+            <!-- Location -->
+            {% if contact_info.location %}
+            <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl text-center border border-purple-200" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-4xl mb-4">📍</div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Location</h3>
+                <p class="text-gray-700 mb-3">{{ contact_info.location }}</p>
+                <span class="text-purple-600 font-medium">Available for remote work</span>
             </div>
-            
-            <div class="bg-white rounded-2xl p-6 border border-gray-200 text-center hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
-                <div class="text-3xl font-bold text-purple-600 mb-2">{{ profile_stats.projects_count|default:"8" }}</div>
-                <div class="text-gray-600 font-medium">Projects</div>
+            {% endif %}
+
+            <!-- Availability -->
+            <div class="bg-gradient-to-br from-orange-50 to-yellow-50 p-6 rounded-2xl text-center border border-orange-200" data-aos="fade-up" data-aos-delay="400">
+                <div class="text-4xl mb-4">⏰</div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Availability</h3>
+                <p class="text-gray-700 mb-3">Open to new opportunities</p>
+                <span class="text-orange-600 font-medium">Response within 24h</span>
             </div>
         </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Contact Form Section -->
+<section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">💬 Send Me a Message</h2>
         
-        <!-- GitHub Charts -->
-        <div class="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- GitHub Stats Chart -->
-            <div class="bg-white rounded-2xl p-6 border border-gray-200" data-aos="fade-right">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">GitHub Statistics</h3>
-                <div class="bg-gray-100 rounded-lg p-4 text-center">
-                    <img src="https://github-readme-stats.vercel.app/api?username=Vijayapardhu&show_icons=true&theme=default&hide_border=true&bg_color=transparent" alt="GitHub Stats" class="w-full max-w-md mx-auto">
+        <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                
+                <!-- Name and Email Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                        <input type="text" id="name" name="name" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                               placeholder="Your full name">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                        <input type="email" id="email" name="email" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                               placeholder="your.email@example.com">
+                    </div>
                 </div>
+
+                <!-- Subject -->
+                <div>
+                    <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject *</label>
+                    <input type="text" id="subject" name="subject" required 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                           placeholder="What's this about?">
+                </div>
+
+                <!-- Message -->
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                    <textarea id="message" name="message" rows="6" required 
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none"
+                              placeholder="Tell me about your project, idea, or just say hello!"></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" 
+                            class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold text-lg">
+                        📤 Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Social Media Section -->
+<section class="py-16 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">🌐 Connect With Me</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- GitHub -->
+            <div class="bg-gray-800 text-white p-6 rounded-2xl text-center transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-4xl mb-4">🐙</div>
+                <h3 class="text-lg font-semibold mb-2">GitHub</h3>
+                <p class="text-gray-300 mb-4">Check out my code</p>
+                <a href="https://github.com/Vijayapardhu" target="_blank" rel="noopener" 
+                   class="inline-block bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors duration-300 font-medium">
+                    View Profile
+                </a>
             </div>
-            
-            <!-- GitHub Streak Chart -->
-            <div class="bg-white rounded-2xl p-6 border border-gray-200" data-aos="fade-left">
-                <h3 class="text-xl font-bold text-gray-900 mb-4">Contribution Streak</h3>
-                <div class="bg-gray-100 rounded-lg p-4 text-center">
-                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=Vijayapardhu&theme=default&hide_border=true&background=transparent" alt="GitHub Streak" class="w-full max-w-md mx-auto">
-                </div>
+
+            <!-- LinkedIn -->
+            {% if contact_info.linkedin_url %}
+            <div class="bg-blue-600 text-white p-6 rounded-2xl text-center transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-4xl mb-4">💼</div>
+                <h3 class="text-lg font-semibold mb-2">LinkedIn</h3>
+                <p class="text-blue-100 mb-4">Professional network</p>
+                <a href="{{ contact_info.linkedin_url }}" target="_blank" rel="noopener" 
+                   class="inline-block bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors duration-300 font-medium">
+                    Connect
+                </a>
+            </div>
+            {% endif %}
+
+            <!-- Twitter/X -->
+            {% if contact_info.twitter_url %}
+            <div class="bg-black text-white p-6 rounded-2xl text-center transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-4xl mb-4">🐦</div>
+                <h3 class="text-lg font-semibold mb-2">Twitter/X</h3>
+                <p class="text-gray-300 mb-4">Tech updates</p>
+                <a href="{{ contact_info.twitter_url }}" target="_blank" rel="noopener" 
+                   class="inline-block bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors duration-300 font-medium">
+                    Follow
+                </a>
+            </div>
+            {% endif %}
+
+            <!-- Portfolio -->
+            <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6 rounded-2xl text-center transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                <div class="text-4xl mb-4">🎨</div>
+                <h3 class="text-lg font-semibold mb-2">Portfolio</h3>
+                <p class="text-purple-100 mb-4">View my work</p>
+                <a href="{% url 'portfolio:projects' %}" 
+                   class="inline-block bg-white text-purple-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors duration-300 font-medium">
+                    Browse Projects
+                </a>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- Quick Contact Section -->
+<section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8" data-aos="fade-up">⚡ Quick Contact</h2>
         
-        <!-- Top Languages Chart -->
-        <div class="mt-8" data-aos="fade-up">
-            <div class="bg-white rounded-2xl p-6 border border-gray-200">
-                <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">Top Programming Languages</h3>
-                <div class="bg-gray-100 rounded-lg p-4 text-center">
-                    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vijayapardhu&layout=compact&theme=default&hide_border=true&bg_color=transparent" alt="Top Languages" class="w-full max-w-md mx-auto">
+        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200" data-aos="fade-up" data-aos-delay="100">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Direct Message</h3>
+                    <p class="text-gray-600 mb-4">Send me a quick message on any platform</p>
+                    {% if contact_info.phone %}
+                    <a href="https://wa.me/{{ contact_info.phone|cut:' '|cut:'+'|cut:'-' }}" target="_blank" rel="noopener" 
+                       class="inline-block bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors duration-300 font-medium">
+                        WhatsApp
+                    </a>
+                    {% endif %}
+                </div>
+                
+                <div class="text-center">
+                    <div class="text-4xl mb-4">📧</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Email</h3>
+                    <p class="text-gray-600 mb-4">For detailed discussions and proposals</p>
+                    {% if contact_info.email %}
+                    <a href="mailto:{{ contact_info.email }}?subject=Portfolio%20Inquiry" 
+                       class="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors duration-300 font-medium">
+                        Send Email
+                    </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Quick Links Section -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-16" data-aos="fade-up">
-            <h2 class="text-4xl font-bold text-gray-900 mb-6">
-                Quick <span class="text-blue-600">Links</span>
-            </h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                Explore more about my work and experience.
-            </p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <a href="{% url 'portfolio:projects' %}" class="group bg-gray-50 rounded-2xl p-8 border border-gray-200 hover:bg-white hover:shadow-lg transition-all duration-300 text-center" data-aos="fade-up" data-aos-delay="100">
-                <div class="text-4xl text-blue-600 mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <i class="fas fa-code"></i>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">View Projects</h3>
-                <p class="text-gray-600">Explore my portfolio of Android apps, web applications, and automation tools.</p>
-            </a>
-            
-            <a href="{% url 'portfolio:about' %}" class="group bg-gray-50 rounded-2xl p-8 border border-gray-200 hover:bg-white hover:shadow-lg transition-all duration-300 text-center" data-aos="fade-up" data-aos-delay="200">
-                <div class="text-4xl text-indigo-600 mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <i class="fas fa-user"></i>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">About Me</h3>
-                <p class="text-gray-600">Learn more about my background, skills, and career goals.</p>
-            </a>
-            
-            <a href="{% url 'portfolio:download_cv' %}" class="group bg-gray-50 rounded-2xl p-8 border border-gray-200 hover:bg-white hover:shadow-lg transition-all duration-300 text-center" data-aos="fade-up" data-aos-delay="300">
-                <div class="text-4xl text-green-600 mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <i class="fas fa-download"></i>
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Download CV</h3>
-                <p class="text-gray-600">Get my detailed resume with all my experience and achievements.</p>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Call to Action -->
-<section class="py-20 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
-    <div class="max-w-4xl mx-auto text-center px-4" data-aos="fade-up">
-        <h2 class="text-4xl font-bold text-white mb-6">
-            Ready to Start a Project?
+<!-- Call to Action Section -->
+<section class="py-20 px-4 bg-gradient-to-r from-purple-600 to-pink-600">
+    <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6" data-aos="fade-up">
+            Ready to Start Something Amazing?
         </h2>
-        <p class="text-xl text-white/90 mb-8">
-            Let's discuss how we can work together to bring your ideas to life.
+        <p class="text-xl text-purple-100 mb-8" data-aos="fade-up" data-aos-delay="100">
+            Let's discuss your project, explore collaboration opportunities, or just have a great conversation about technology.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#contactForm" class="bg-white text-blue-600 px-8 py-4 rounded-xl hover:bg-gray-100 transition-all duration-300 font-semibold text-lg shadow-lg">
-                <i class="fas fa-envelope mr-2"></i>Send Message
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="200">
+            <a href="#contact-form" class="bg-white text-purple-600 px-8 py-4 rounded-xl hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold text-lg">
+                📝 Start Project
             </a>
-            <a href="https://github.com/Vijayapardhu" target="_blank" rel="noopener" class="bg-white/20 text-white px-8 py-4 rounded-xl border border-white/30 hover:bg-white/30 transition-all duration-300 font-semibold text-lg">
-                <i class="fab fa-github mr-2"></i>View on GitHub
+            <a href="{% url 'portfolio:projects' %}" class="bg-transparent text-white border-2 border-white px-8 py-4 rounded-xl hover:bg-white hover:text-purple-600 transition-all duration-300 transform hover:scale-105 font-semibold text-lg">
+                🚀 View My Work
             </a>
         </div>
     </div>
 </section>
+{% endblock %}
 
-<!-- Contact Form Script -->
+{% block extra_js %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.getElementById('contactForm');
-    const formSuccess = document.getElementById('formSuccess');
-    const formError = document.getElementById('formError');
-    const errorMessage = document.getElementById('errorMessage');
+    // Form submission handling
+    const contactForm = document.querySelector('form');
     
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Hide previous messages
-        formSuccess.classList.add('hidden');
-        formError.classList.add('hidden');
-        
         // Get form data
-        const formData = new FormData(contactForm);
-        const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            subject: formData.get('subject'),
-            message: formData.get('message')
-        };
+        const formData = new FormData(this);
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalText = submitButton.innerHTML;
         
-        // Simulate form submission (replace with actual backend endpoint)
+        // Show loading state
+        submitButton.innerHTML = '📤 Sending...';
+        submitButton.disabled = true;
+        
+        // Simulate form submission (replace with actual AJAX call)
         setTimeout(() => {
             // Show success message
-            formSuccess.classList.remove('hidden');
+            submitButton.innerHTML = '✅ Message Sent!';
+            submitButton.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-pink-600');
+            submitButton.classList.add('bg-green-500');
+            
+            // Reset form
             contactForm.reset();
             
-            // Hide success message after 5 seconds
+            // Reset button after 3 seconds
             setTimeout(() => {
-                formSuccess.classList.add('hidden');
-            }, 5000);
-        }, 1000);
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+                submitButton.classList.remove('bg-green-500');
+                submitButton.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-pink-600');
+            }, 3000);
+        }, 2000);
+    });
+    
+    // Form validation
+    const inputs = contactForm.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            if (this.hasAttribute('required') && !this.value.trim()) {
+                this.classList.add('border-red-500');
+            } else {
+                this.classList.remove('border-red-500');
+            }
+        });
         
-        // In a real application, you would send this data to your backend
-        console.log('Form submitted:', data);
+        input.addEventListener('input', function() {
+            if (this.classList.contains('border-red-500') && this.value.trim()) {
+                this.classList.remove('border-red-500');
+            }
+        });
     });
 });
 </script>

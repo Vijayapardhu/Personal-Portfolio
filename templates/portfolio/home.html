@@ -1,446 +1,216 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Vijaya Pardhu - Home{% endblock %}
+{% block title %}Vijaya Pardhu - Portfolio{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
-<section class="hero-section bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-20">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-        <div class="mb-12" data-aos="fade-down" data-aos-delay="200">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-gray-900">
-                👋 Hey, I'm <span class="text-blue-600">Vijaya Pardhu</span>
+<section class="hero-section bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-20 px-4">
+    <div class="max-w-7xl mx-auto text-center">
+        <div data-aos="fade-up" data-aos-delay="100">
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
+                👋 Hey, I'm Vijaya Pardhu
             </h1>
-            <p class="text-2xl md:text-3xl text-gray-700 mb-8 leading-relaxed">
+            <p class="text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto">
                 💻 Student | Android & Web Developer | Firebase Enthusiast 🚀
             </p>
-            <p class="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
-                Building meaningful tech for society through code and innovation. 
-                Passionate about creating solutions that make a real impact.
-            </p>
-        </div>
-        
-        <!-- Profile Stats -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12" data-aos="fade-up" data-aos-delay="400">
-            <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
-                <div class="text-3xl font-bold text-blue-600 mb-2">{{ profile_stats.profile_views|default:"0" }}</div>
-                <div class="text-gray-600 font-medium">Profile Views</div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'portfolio:download_cv' %}" class="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold text-lg">
+                    📄 Download CV
+                </a>
+                <a href="{% url 'portfolio:contact' %}" class="bg-gray-800 text-white px-8 py-4 rounded-xl hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold text-lg">
+                    📧 Get In Touch
+                </a>
             </div>
-            <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
-                <div class="text-3xl font-bold text-indigo-600 mb-2">{{ profile_stats.github_followers|default:"25" }}</div>
-                <div class="text-gray-600 font-medium">GitHub Followers</div>
-            </div>
-            <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
-                <div class="text-3xl font-bold text-green-600 mb-2">{{ profile_stats.github_stars|default:"15" }}</div>
-                <div class="text-gray-600 font-medium">GitHub Stars</div>
-            </div>
-            <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300">
-                <div class="text-3xl font-bold text-purple-600 mb-2">{{ profile_stats.projects_count|default:"8" }}</div>
-                <div class="text-gray-600 font-medium">Projects</div>
-            </div>
-        </div>
-        
-        <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="600">
-            <a href="{% url 'portfolio:download_cv' %}" class="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold text-lg">
-                <i class="fas fa-download mr-2"></i>Download CV
-            </a>
-            <a href="{% url 'portfolio:projects' %}" class="bg-white text-blue-600 px-8 py-4 rounded-xl border-2 border-blue-600 hover:bg-blue-50 transition-all duration-300 font-semibold text-lg shadow-lg">
-                <i class="fas fa-eye mr-2"></i>View Projects
-            </a>
         </div>
     </div>
 </section>
+
+<!-- Profile Stats Section -->
+{% if profile_stats %}
+<section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">Profile Stats</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-2xl shadow-lg border text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="text-4xl mb-4">👁️</div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ profile_stats.views|default:"0" }}</h3>
+                <p class="text-gray-600">Profile Views</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-lg border text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-4xl mb-4">👥</div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ profile_stats.followers|default:"0" }}</h3>
+                <p class="text-gray-600">GitHub Followers</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-lg border text-center" data-aos="fade-up" data-aos-delay="300">
+                <div class="text-4xl mb-4">⭐</div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">{{ profile_stats.stars|default:"0" }}</h3>
+                <p class="text-gray-600">GitHub Stars</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
 
 <!-- About Me Section -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-16" data-aos="fade-up">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                About <span class="text-blue-600">Me</span>
-            </h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                I'm a passionate student developer who loves turning ideas into reality through code. 
-                My journey in technology started with curiosity and has evolved into a mission to build meaningful solutions.
-            </p>
-        </div>
+{% if education or skills %}
+<section class="py-16 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">About Me</h2>
         
-        <!-- Education & Goals -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            <!-- Education -->
-            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200" data-aos="fade-right">
-                <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                    <i class="fas fa-graduation-cap text-blue-600 mr-3 text-2xl"></i>
-                    Education
-                </h3>
-                {% if education %}
-                <div class="space-y-4">
-                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                        <h4 class="text-lg font-semibold text-gray-900">{{ education.degree }}</h4>
-                        <p class="text-gray-700">{{ education.institution }}</p>
-                        <p class="text-gray-500">{{ education.location }}</p>
-                        <div class="flex items-center justify-between mt-3">
-                            <span class="text-blue-600 font-semibold">{{ education.start_year }} - {% if education.current %}Present{% else %}{{ education.end_year }}{% endif %}</span>
-                            {% if education.score %}
-                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                                {{ education.score }}
-                            </span>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                {% else %}
-                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                    <h4 class="text-lg font-semibold text-gray-900">Diploma in Computer Engineering</h4>
-                    <p class="text-gray-700">Aditya College of Engineering</p>
-                    <p class="text-gray-500">Surampalem, Andhra Pradesh</p>
-                    <div class="flex items-center justify-between mt-3">
-                        <span class="text-blue-600 font-semibold">2023 - Present</span>
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">76%</span>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-            
-            <!-- Goals -->
-            <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200" data-aos="fade-left">
-                <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                    <i class="fas fa-target text-indigo-600 mr-3 text-2xl"></i>
-                    My Goal
-                </h3>
-                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
-                    <p class="text-lg text-gray-800 leading-relaxed">
-                        To become a <span class="font-bold text-blue-600">Full-Stack Developer</span>, skilled in 
-                        <span class="font-bold text-indigo-600">Android</span>, <span class="font-bold text-green-600">Cloud</span>, 
-                        and <span class="font-bold text-purple-600">Modern Web Tech</span>, while contributing to 
-                        <span class="font-bold text-orange-600">open-source</span> & building meaningful tech for society.
+        {% if education %}
+        <div class="mb-12" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">🎓 Education</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {% for edu in education %}
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">{{ edu.degree }}</h4>
+                    <p class="text-gray-700 mb-2">{{ edu.institution }}</p>
+                    {% if edu.location %}
+                    <p class="text-gray-600 mb-2">{{ edu.location }}</p>
+                    {% endif %}
+                    <p class="text-gray-600 mb-3">
+                        {% if edu.current %}
+                            {{ edu.start_year }} - Present
+                        {% else %}
+                            {{ edu.start_year }} - {{ edu.end_year|default:"Present" }}
+                        {% endif %}
                     </p>
+                    {% if edu.score %}
+                    <p class="text-blue-600 font-semibold">Current Score: {{ edu.score }}%</p>
+                    {% endif %}
+                    {% if edu.description %}
+                    <p class="text-sm text-gray-600 mt-3">{{ edu.description }}</p>
+                    {% endif %}
                 </div>
+                {% endfor %}
             </div>
         </div>
+        {% endif %}
+        
+        {% if skills %}
+        <div class="mb-12" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6">💻 Technical Skills</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for skill in skills %}
+                <div class="bg-gray-50 p-4 rounded-xl">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-semibold text-gray-900">{{ skill.name }}</span>
+                        <span class="text-blue-600 font-bold">{{ skill.proficiency_level }}%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-blue-600 h-2 rounded-full" style="width: {{ skill.proficiency_level }}%"></div>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2">{{ skill.category }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
     </div>
 </section>
+{% endif %}
 
 <!-- Featured Projects Section -->
-<section class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-16" data-aos="fade-up">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Featured <span class="text-blue-600">Projects</span>
-            </h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                Here are some of my most impactful projects that showcase my skills and passion for development.
-            </p>
-        </div>
-        
+{% if projects %}
+<section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">Featured Projects</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for project in featured_projects %}
-            <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}">
+            {% for project in projects %}
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}">
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-4">
-                        <div class="text-3xl text-blue-600">
-                            <i class="{{ project.icon }}"></i>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            {% if project.stars > 0 %}
-                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium">
-                                ⭐ {{ project.stars }}
-                            </span>
-                            {% endif %}
-                            {% if project.forks > 0 %}
-                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
-                                🔄 {{ project.forks }}
-                            </span>
-                            {% endif %}
+                        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">{{ project.project_type }}</span>
+                        <span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">{{ project.difficulty }}</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">{{ project.title }}</h3>
+                    <p class="text-gray-600 mb-4">{{ project.description|truncatewords:20 }}</p>
+                    <div class="mb-4">
+                        <p class="text-sm text-gray-500 mb-2">Technologies:</p>
+                        <div class="flex flex-wrap gap-2">
+                            {% for tech in project.technologies|slice:":5" %}
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">{{ tech }}</span>
+                            {% endfor %}
                         </div>
                     </div>
-                    
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">{{ project.title }}</h3>
-                    <p class="text-gray-600 mb-4">{{ project.short_description }}</p>
-                    
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        {% for tech in project.technologies|slice:":3" %}
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">{{ tech }}</span>
-                        {% endfor %}
-                        {% if project.technologies|length > 3 %}
-                        <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs">+{{ project.technologies|length|add:"-3" }}</span>
+                    <div class="flex gap-3">
+                        {% if project.github_url %}
+                        <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="flex-1 bg-gray-800 text-white text-center py-2 px-4 rounded-lg hover:bg-gray-900 transition-colors duration-300">
+                            <i class="fab fa-github mr-2"></i>GitHub
+                        </a>
+                        {% endif %}
+                        {% if project.live_url %}
+                        <a href="{{ project.live_url }}" target="_blank" rel="noopener" class="flex-1 bg-blue-600 text-white text-center py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300">
+                            <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                        </a>
                         {% endif %}
                     </div>
-                    
-                    <div class="flex items-center justify-between">
-                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium capitalize">
-                            {{ project.difficulty_level }}
-                        </span>
-                        <a href="{{ project.github_url }}" target="_blank" rel="noopener" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm font-medium">
-                            <i class="fab fa-github mr-2"></i>View on GitHub
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            <!-- Default project cards if no data -->
-            <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105" data-aos="fade-up">
-                <div class="p-6">
-                    <div class="text-3xl text-blue-600 mb-4">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">HeySara - AI Assistant App</h3>
-                    <p class="text-gray-600 mb-4">An intelligent AI-powered personal assistant app for Android with voice recognition and natural language processing.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Kotlin</span>
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Firebase</span>
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">AI</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Advanced</span>
-                        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm font-medium">
-                            <i class="fab fa-github mr-2"></i>View on GitHub
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-6">
-                    <div class="text-3xl text-blue-600 mb-4">
-                        <i class="fas fa-church"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Church Management System</h3>
-                    <p class="text-gray-600 mb-4">Comprehensive church management solution with member registration, event management, and communication tools.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Django</span>
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Python</span>
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">MySQL</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">Intermediate</span>
-                        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm font-medium">
-                            <i class="fab fa-github mr-2"></i>View on GitHub
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="200">
-                <div class="p-6">
-                    <div class="text-3xl text-blue-600 mb-4">
-                        <i class="fas fa-plane"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Tourism Management System</h3>
-                    <p class="text-gray-600 mb-4">Complete tourism booking platform with hotel bookings, tour packages, and payment processing.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">PHP</span>
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">MySQL</span>
-                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">Bootstrap</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">Intermediate</span>
-                        <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm font-medium">
-                            <i class="fab fa-github mr-2"></i>View on GitHub
-                        </a>
-                    </div>
                 </div>
             </div>
             {% endfor %}
         </div>
-        
         <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="400">
             <a href="{% url 'portfolio:projects' %}" class="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold text-lg">
-                <i class="fas fa-eye mr-2"></i>View All Projects
+                View All Projects
             </a>
         </div>
     </div>
 </section>
-
-<!-- Tech Stack Section -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-16" data-aos="fade-up">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Tech <span class="text-blue-600">Stack</span>
-            </h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                I've worked with a variety of technologies and tools to bring my ideas to life.
-            </p>
-        </div>
-        
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {% for skill in skills %}
-            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:50 }}">
-                <div class="text-4xl mb-4">
-                    <i class="{{ skill.icon }} text-blue-600"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ skill.name }}</h3>
-                <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
-                    <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full transition-all duration-500" style="width: {{ skill.proficiency }}%"></div>
-                </div>
-                <span class="text-gray-600 text-sm font-medium">{{ skill.proficiency }}%</span>
-            </div>
-            {% empty %}
-            <!-- Default skills if no data -->
-            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up">
-                <div class="text-4xl mb-4">
-                    <i class="fab fa-java text-blue-600"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Java</h3>
-                <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
-                    <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full" style="width: 85%"></div>
-                </div>
-                <span class="text-gray-600 text-sm font-medium">85%</span>
-            </div>
-            
-            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="50">
-                <div class="text-4xl mb-4">
-                    <i class="fab fa-android text-blue-600"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Kotlin</h3>
-                <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
-                    <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full" style="width: 80%"></div>
-                </div>
-                <span class="text-gray-600 text-sm font-medium">80%</span>
-            </div>
-            
-            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="100">
-                <div class="text-4xl mb-4">
-                    <i class="fab fa-python text-blue-600"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Python</h3>
-                <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
-                    <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full" style="width: 75%"></div>
-                </div>
-                <span class="text-gray-600 text-sm font-medium">75%</span>
-            </div>
-            
-            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="150">
-                <div class="text-4xl mb-4">
-                    <i class="fas fa-fire text-blue-600"></i>
-                </div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Firebase</h3>
-                <div class="w-full bg-gray-200 rounded-full h-2 mb-3">
-                    <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full" style="width: 80%"></div>
-                </div>
-                <span class="text-gray-600 text-sm font-medium">80%</span>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
+{% endif %}
 
 <!-- Achievements Section -->
-<section class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-16" data-aos="fade-up">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                <span class="text-blue-600">Achievements</span> & Recognition
-            </h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                Milestones and accomplishments that mark my journey in technology and development.
-            </p>
-        </div>
-        
+{% if achievements %}
+<section class="py-16 px-4 bg-white">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">🏆 Achievements</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for achievement in achievements %}
-            <div class="bg-white rounded-2xl p-6 border border-gray-200 text-center hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}">
-                <div class="text-5xl mb-4">{{ achievement.icon }}</div>
+            <div class="bg-gray-50 p-6 rounded-2xl text-center transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}">
+                <div class="text-4xl mb-4">{{ achievement.icon|default:"🏆" }}</div>
                 <h3 class="text-xl font-bold text-gray-900 mb-3">{{ achievement.title }}</h3>
                 <p class="text-gray-600 mb-4">{{ achievement.description }}</p>
-                <div class="flex items-center justify-center">
-                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium capitalize">
-                        {{ achievement.achievement_type }}
-                    </span>
-                </div>
-            </div>
-            {% empty %}
-            <!-- Default achievements if no data -->
-            <div class="bg-white rounded-2xl p-6 border border-gray-200 text-center hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up">
-                <div class="text-5xl mb-4">🏆</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Best Android Developer Award</h3>
-                <p class="text-gray-600 mb-4">Received recognition for developing innovative Android applications at college tech fest</p>
-                <div class="flex items-center justify-center">
-                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium capitalize">Award</span>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-2xl p-6 border border-gray-200 text-center hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="100">
-                <div class="text-5xl mb-4">👨‍💻</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Google Developer Student Clubs Member</h3>
-                <p class="text-gray-600 mb-4">Active member of GDSC, participating in workshops and hackathons</p>
-                <div class="flex items-center justify-center">
-                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium capitalize">Certification</span>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-2xl p-6 border border-gray-200 text-center hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="200">
-                <div class="text-5xl mb-4">🥇</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Hackathon Winner</h3>
-                <p class="text-gray-600 mb-4">Won first place in college hackathon for developing a social impact project</p>
-                <div class="flex items-center justify-center">
-                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium capitalize">Award</span>
-                </div>
+                <span class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full">{{ achievement.year }}</span>
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
+{% endif %}
 
 <!-- Hobbies Section -->
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-16" data-aos="fade-up">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                <span class="text-blue-600">Hobbies</span> & Interests
-            </h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                Beyond coding, here are some things that keep me inspired and balanced.
-            </p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+{% if hobbies %}
+<section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">🎨 Hobbies & Interests</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {% for hobby in hobbies %}
-            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}">
-                <div class="text-5xl mb-4">{{ hobby.icon }}</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">{{ hobby.name }}</h3>
-                <p class="text-gray-600">{{ hobby.description }}</p>
-            </div>
-            {% empty %}
-            <!-- Default hobbies if no data -->
-            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up">
-                <div class="text-5xl mb-4">🎵</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Music & Podcasts</h3>
-                <p class="text-gray-600">Love listening to music and tech podcasts while coding</p>
-            </div>
-            
-            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="100">
-                <div class="text-5xl mb-4">🎨</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">UI Design</h3>
-                <p class="text-gray-600">Creating beautiful and intuitive user interfaces</p>
-            </div>
-            
-            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center hover:bg-white hover:shadow-lg transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="200">
-                <div class="text-5xl mb-4">🔬</div>
-                <h3 class="text-xl font-bold text-gray-900 mb-3">Experimenting with Tech</h3>
-                <p class="text-gray-600">Always trying new technologies and frameworks</p>
+            <div class="bg-white p-6 rounded-2xl text-center shadow-lg transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:0|add:100 }}">
+                <div class="text-3xl mb-4">{{ hobby.icon|default:"🎯" }}</div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ hobby.name }}</h3>
+                <p class="text-gray-600 text-sm">{{ hobby.description|default:hobby.category }}</p>
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
+{% endif %}
 
-<!-- Call to Action -->
-<section class="py-20 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
-    <div class="max-w-4xl mx-auto text-center px-4" data-aos="fade-up">
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+<!-- Call to Action Section -->
+<section class="py-20 px-4 bg-gradient-to-r from-blue-600 to-indigo-600">
+    <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6" data-aos="fade-up">
             Ready to Build Something Amazing?
         </h2>
-        <p class="text-xl text-white/90 mb-8">
-            Let's collaborate on your next project or discuss how we can work together.
+        <p class="text-xl text-blue-100 mb-8" data-aos="fade-up" data-aos-delay="100">
+            Let's connect and discuss how we can work together on your next project.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="{% url 'portfolio:contact' %}" class="bg-white text-blue-600 px-8 py-4 rounded-xl hover:bg-gray-100 transition-all duration-300 font-semibold text-lg shadow-lg">
-                <i class="fas fa-envelope mr-2"></i>Get In Touch
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="200">
+            <a href="{% url 'portfolio:contact' %}" class="bg-white text-blue-600 px-8 py-4 rounded-xl hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg font-semibold text-lg">
+                📧 Get In Touch
             </a>
-            <a href="{% url 'portfolio:projects' %}" class="bg-white/20 text-white px-8 py-4 rounded-xl border border-white/30 hover:bg-white/30 transition-all duration-300 font-semibold text-lg">
-                <i class="fas fa-eye mr-2"></i>View My Work
+            <a href="{% url 'portfolio:projects' %}" class="bg-transparent text-white border-2 border-white px-8 py-4 rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105 font-semibold text-lg">
+                🚀 View Projects
             </a>
         </div>
     </div>
