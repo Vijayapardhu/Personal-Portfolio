@@ -220,9 +220,9 @@ def download_cv(request):
                 skill_categories[skill.category].append(skill)
             
             for category, category_skills in skill_categories.items():
-                category_name = dict(Skill.SKILL_CATEGORIES)[category]
+                category_name = dict(Skill.SKILL_CATEGORIES).get(category, category.capitalize())
                 story.append(Paragraph(f"<b>{category_name}</b>", normal_style))
-                skill_text = ", ".join([f"{skill.name} ({skill.proficiency_level}%)" for skill in category_skills])
+                skill_text = ", ".join([f"{skill.name} ({skill.proficiency}%)" for skill in category_skills])
                 story.append(Paragraph(skill_text, normal_style))
                 story.append(Spacer(1, 8))
         

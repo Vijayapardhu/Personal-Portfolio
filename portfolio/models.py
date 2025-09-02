@@ -89,7 +89,7 @@ class Skill(models.Model):
     ]
     
     name = models.CharField(max_length=100)
-    category = models.CharField(max_length=20, choices=SKILL_CATEGORIES, default='programming')
+    category = models.CharField(max_length=20, choices=SKILL_CATEGORIES, default='programming', blank=False, null=False)
     icon = models.CharField(max_length=50, help_text="Icon name or emoji")
     proficiency = models.IntegerField(default=80, help_text="Skill proficiency percentage (0-100)")
     featured = models.BooleanField(default=False)
