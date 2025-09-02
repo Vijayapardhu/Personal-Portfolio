@@ -95,12 +95,14 @@ class Command(BaseCommand):
         ]
         
         for skill_data in skills_data:
-            skill, created = Skill.objects.get_or_create(
+            skill, created = Skill.objects.update_or_create(
                 name=skill_data['name'],
                 defaults=skill_data
             )
             if created:
                 self.stdout.write(f'✓ Skill "{skill.name}" created')
+            else:
+                self.stdout.write(f'✓ Skill "{skill.name}" updated')
         
         # Hobbies
         hobbies_data = [
