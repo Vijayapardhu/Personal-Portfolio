@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="py-20 bg-gradient-to-br from-primary/10 via-white to-accent/10 dark:from-primary/20 dark:via-gray-900 dark:to-accent/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6" data-aos="fade-up">
+            My Projects
+        </h1>
+        <div class="w-24 h-1 bg-primary mx-auto rounded-full mb-8" data-aos="fade-up" data-aos-delay="100"></div>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            A collection of my work showcasing different technologies, problem-solving approaches, and creative solutions
+        </p>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {% if projects %}
+        <!-- Featured Projects -->
+        {% if featured_projects %}
+        <div class="mb-16" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                <i class="fas fa-star text-yellow-500 mr-3"></i>
+                Featured Projects
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {% for project in featured_projects %}
+                <div class="bg-gradient-to-br from-primary/5 to-accent/5 border-2 border-primary/20 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    {% if project.image %}
+                    <div class="relative overflow-hidden h-64">
+                        <img src="{{ project.image.url }}" 
+                             alt="{{ project.title }}" 
+                             class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                <i class="fas fa-star mr-1"></i>Featured
+                            </span>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="h-64 bg-gradient-to-br from-primary to-accent flex items-center justify-center relative">
+                        <i class="fas fa-code text-white text-6xl"></i>
+                        <div class="absolute top-4 right-4">
+                            <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                <i class="fas fa-star mr-1"></i>Featured
+                            </span>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+                            {{ project.title }}
+                        </h3>
+                        
+                        <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                            {{ project.description|truncatewords:30 }}
+                        </p>
+                        
+                        <!-- Tech Stack -->
+                        {% if project.tech_stack.all %}
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            {% for skill in project.tech_stack.all %}
+                            <span class="px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full border border-primary/20">
+                                {{ skill.name }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        
+                        <div class="flex space-x-3">
+                            {% if project.github_link %}
+                            <a href="{{ project.github_link }}" target="_blank" rel="noopener noreferrer"
+                               class="flex-1 bg-gray-900 text-white text-center py-3 px-4 rounded-lg hover:bg-gray-800 transition-colors font-semibold">
+                                <i class="fab fa-github mr-2"></i>
+                                View Code
+                            </a>
+                            {% endif %}
+                            
+                            {% if project.live_link %}
+                            <a href="{{ project.live_link }}" target="_blank" rel="noopener noreferrer"
+                               class="flex-1 bg-primary text-white text-center py-3 px-4 rounded-lg hover:bg-primary/90 transition-colors font-semibold">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                Live Demo
+                            </a>
+                            {% endif %}
+                            
+                            {% if not project.github_link and not project.live_link %}
+                            <a href="{% url 'main:project_detail' project.id %}"
+                               class="flex-1 bg-primary text-white text-center py-3 px-4 rounded-lg hover:bg-primary/90 transition-colors font-semibold">
+                                <i class="fas fa-eye mr-2"></i>
+                                View Details
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- All Projects -->
+        <div data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                All Projects
+            </h2>
+            
+            <!-- Project Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for project in projects %}
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden border border-gray-100 dark:border-gray-700" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1|add:0 }}">
+                    {% if project.image %}
+                    <div class="relative overflow-hidden h-48">
+                        <img src="{{ project.image.url }}" 
+                             alt="{{ project.title }}" 
+                             class="w-full h-full object-cover hover:scale-110 transition-transform duration-300">
+                        {% if project.featured %}
+                        <div class="absolute top-2 right-2">
+                            <span class="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                                <i class="fas fa-star mr-1"></i>Featured
+                            </span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <div class="h-48 bg-gradient-to-br from-primary to-accent flex items-center justify-center relative">
+                        <i class="fas fa-code text-white text-4xl"></i>
+                        {% if project.featured %}
+                        <div class="absolute top-2 right-2">
+                            <span class="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                                <i class="fas fa-star mr-1"></i>Featured
+                            </span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                            {{ project.title }}
+                        </h3>
+                        
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            {{ project.short_description|truncatewords:20 }}
+                        </p>
+                        
+                        <!-- Tech Stack -->
+                        {% if project.tech_stack.all %}
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            {% for skill in project.tech_stack.all|slice:":3" %}
+                            <span class="px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
+                                {{ skill.name }}
+                            </span>
+                            {% endfor %}
+                            {% if project.tech_stack.count > 3 %}
+                            <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-medium rounded-full">
+                                +{{ project.tech_stack.count|add:"-3" }}
+                            </span>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        
+                        <div class="flex space-x-3">
+                            {% if project.github_link %}
+                            <a href="{{ project.github_link }}" target="_blank" rel="noopener noreferrer"
+                               class="flex-1 bg-gray-900 text-white text-center py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors text-sm font-medium">
+                                <i class="fab fa-github mr-2"></i>
+                                Code
+                            </a>
+                            {% endif %}
+                            
+                            {% if project.live_link %}
+                            <a href="{{ project.live_link }}" target="_blank" rel="noopener noreferrer"
+                               class="flex-1 bg-primary text-white text-center py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                Demo
+                            </a>
+                            {% endif %}
+                            
+                            {% if not project.github_link and not project.live_link %}
+                            <a href="{% url 'main:project_detail' project.id %}"
+                               class="flex-1 bg-primary text-white text-center py-2 px-4 rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
+                                <i class="fas fa-eye mr-2"></i>
+                                Details
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        {% else %}
+        <!-- No Projects Message -->
+        <div class="text-center py-20" data-aos="fade-up">
+            <div class="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-folder-open text-primary text-4xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                No Projects Yet
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 max-w-md mx-auto mb-8">
+                Projects will appear here once you add them through the Django admin panel. 
+                Each project can include images, descriptions, tech stacks, and links.
+            </p>
+            <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl max-w-md mx-auto">
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">To add projects:</h4>
+                <ol class="text-sm text-gray-600 dark:text-gray-300 text-left space-y-1">
+                    <li>1. Go to Django admin panel</li>
+                    <li>2. Navigate to "Projects" section</li>
+                    <li>3. Click "Add Project"</li>
+                    <li>4. Fill in project details and save</li>
+                </ol>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            Have a Project in Mind?
+        </h2>
+        <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+            I'm always excited to work on new and challenging projects. 
+            Let's discuss how we can bring your ideas to life!
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'main:contact' %}" 
+               class="inline-flex items-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl">
+                <i class="fas fa-paper-plane mr-2"></i>
+                Let's Discuss
+            </a>
+            
+            <a href="{% url 'main:about' %}" 
+               class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-primary transition-colors">
+                <i class="fas fa-user mr-2"></i>
+                Learn About Me
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

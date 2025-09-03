@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="py-20 bg-gradient-to-br from-primary/10 via-white to-accent/10 dark:from-primary/20 dark:via-gray-900 dark:to-accent/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6" data-aos="fade-up">
+            My Skills
+        </h1>
+        <div class="w-24 h-1 bg-primary mx-auto rounded-full mb-8" data-aos="fade-up" data-aos-delay="100"></div>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            A comprehensive overview of my technical expertise and proficiency levels across various technologies
+        </p>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {% if skills_by_category %}
+        {% for category, skills in skills_by_category.items %}
+        <div class="mb-20" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1|add:0 }}">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                    {% if category == 'programming' %}
+                        <i class="fas fa-code text-primary mr-3"></i>
+                        Programming Languages
+                    {% elif category == 'framework' %}
+                        <i class="fas fa-layer-group text-primary mr-3"></i>
+                        Frameworks & Libraries
+                    {% elif category == 'database' %}
+                        <i class="fas fa-database text-primary mr-3"></i>
+                        Databases
+                    {% elif category == 'tool' %}
+                        <i class="fas fa-tools text-primary mr-3"></i>
+                        Tools & Platforms
+                    {% else %}
+                        <i class="fas fa-cogs text-primary mr-3"></i>
+                        {{ category|title }}
+                    {% endif %}
+                </h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for skill in skills %}
+                <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-700">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            {% if skill.icon_url %}
+                            <img src="{{ skill.icon_url }}" alt="{{ skill.name }}" class="w-10 h-10 rounded-lg">
+                            {% else %}
+                            <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-code text-primary text-lg"></i>
+                            </div>
+                            {% endif %}
+                            <h3 class="font-semibold text-gray-900 dark:text-white text-lg">{{ skill.name }}</h3>
+                        </div>
+                        <span class="text-lg font-bold text-primary">{{ skill.proficiency }}%</span>
+                    </div>
+                    
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-4">
+                        <div class="bg-primary h-3 rounded-full transition-all duration-1000 ease-out" 
+                             style="width: {{ skill.proficiency }}%"></div>
+                    </div>
+                    
+                    <!-- Proficiency Level -->
+                    <div class="text-center">
+                        {% if skill.proficiency >= 90 %}
+                        <span class="px-3 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 text-xs font-medium rounded-full">
+                            Expert
+                        </span>
+                        {% elif skill.proficiency >= 70 %}
+                        <span class="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-medium rounded-full">
+                            Advanced
+                        </span>
+                        {% elif skill.proficiency >= 50 %}
+                        <span class="px-3 py-1 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 text-xs font-medium rounded-full">
+                            Intermediate
+                        </span>
+                        {% else %}
+                        <span class="px-3 py-1 bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200 text-xs font-medium rounded-full">
+                            Beginner
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        
+        <!-- Skills Summary -->
+        <div class="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-2xl" data-aos="fade-up">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                Skills Summary
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-primary">{{ skills|length }}</div>
+                    <div class="text-gray-600 dark:text-gray-300 text-sm">Total Skills</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-600">
+                        {{ highest_proficiency }}%
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-300 text-sm">Highest Level</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-blue-600">
+                        {{ skills_by_category|length }}
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-300 text-sm">Categories</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-purple-600">
+                        {% widthratio skills|length 1 1 %}
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-300 text-sm">Years Experience</div>
+                </div>
+            </div>
+        </div>
+        
+        {% else %}
+        <!-- No Skills Message -->
+        <div class="text-center py-20" data-aos="fade-up">
+            <div class="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-code text-primary text-4xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                No Skills Added Yet
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 max-w-md mx-auto mb-8">
+                Skills will appear here once you add them through the Django admin panel. 
+                Each skill can include proficiency levels, categories, and icon URLs.
+            </p>
+            <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl max-w-md mx-auto">
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">To add skills:</h4>
+                <ol class="text-sm text-gray-600 dark:text-gray-300 text-left space-y-1">
+                    <li>1. Go to Django admin panel</li>
+                    <li>2. Navigate to "Skills" section</li>
+                    <li>3. Click "Add Skill"</li>
+                    <li>4. Fill in skill details and save</li>
+                </ol>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Learning Journey Section -->
+<section class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                My Learning Journey
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
+                How I've grown and evolved in my technical skills over time
+            </p>
+        </div>
+        
+        <div class="max-w-4xl mx-auto">
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-primary/30"></div>
+                
+                <!-- Timeline Items -->
+                <div class="space-y-12">
+                    <div class="relative flex items-start space-x-6" data-aos="fade-right">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0 z-10">
+                            <i class="fas fa-mobile-alt text-white text-xl"></i>
+                        </div>
+                        <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg flex-1">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Android Development</h3>
+                            <p class="text-primary font-semibold mb-2">2022 - Present</p>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Started with Java and Kotlin, learned Android Studio, Firebase integration, 
+                                and AI automation. Built multiple apps for real-world use.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative flex items-start space-x-6" data-aos="fade-left">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0 z-10">
+                            <i class="fas fa-code text-white text-xl"></i>
+                        </div>
+                        <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg flex-1">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Web Development</h3>
+                            <p class="text-primary font-semibold mb-2">2023 - Present</p>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Expanded into web technologies including HTML, CSS, JavaScript, 
+                                PHP, and now Django. Learning modern frameworks and best practices.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative flex items-start space-x-6" data-aos="fade-right">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0 z-10">
+                            <i class="fas fa-cloud text-white text-xl"></i>
+                        </div>
+                        <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg flex-1">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Cloud & AI</h3>
+                            <p class="text-primary font-semibold mb-2">2023 - Present</p>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Exploring Firebase, cloud services, and AI automation tools. 
+                                Building intelligent applications with modern cloud technologies.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="relative flex items-start space-x-6" data-aos="fade-left">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0 z-10">
+                            <i class="fas fa-rocket text-white text-xl"></i>
+                        </div>
+                        <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg flex-1">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Full-Stack Development</h3>
+                            <p class="text-primary font-semibold mb-2">2024 - Future</p>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Current focus on becoming a full-stack developer with expertise 
+                                in both frontend and backend technologies.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            Ready to Work Together?
+        </h2>
+        <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+            I'm constantly learning and improving my skills. 
+            Let's discuss how my expertise can help bring your projects to life!
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'main:contact' %}" 
+               class="inline-flex items-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl">
+                <i class="fas fa-paper-plane mr-2"></i>
+                Let's Connect
+            </a>
+            
+            <a href="{% url 'main:projects' %}" 
+               class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-primary transition-colors">
+                <i class="fas fa-eye mr-2"></i>
+                See My Work
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

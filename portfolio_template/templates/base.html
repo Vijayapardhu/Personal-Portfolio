@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if site_settings.site_name %}{{ site_settings.site_name }}{% else %}Portfolio{% endif %}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{% if profile.about_text %}{{ profile.about_text|truncatewords:25 }}{% else %}Professional portfolio showcasing skills, projects, and achievements{% endif %}">
+    <meta name="keywords" content="portfolio, developer, web developer, software engineer, projects, skills">
+    <meta name="author" content="{% if profile.name %}{{ profile.name }}{% else %}Portfolio Owner{% endif %}">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{% if site_settings.site_name %}{{ site_settings.site_name }}{% else %}Portfolio{% endif %}">
+    <meta property="og:description" content="{% if profile.about_text %}{{ profile.about_text|truncatewords:25 }}{% else %}Professional portfolio showcasing skills, projects, and achievements{% endif %}">
+    <meta property="og:type" content="website">
+    {% if profile.profile_picture %}
+    <meta property="og:image" content="{{ profile.profile_picture.url }}">
+    {% endif %}
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* Dark mode scrollbar */
+        .dark ::-webkit-scrollbar-track {
+            background: #374151;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #6b7280;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+        
+        /* Custom animations */
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Smooth transitions */
+        * {
+            transition: all 0.3s ease;
+        }
+    </style>
+    
+    <!-- TailwindCSS Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '{{ site_settings.primary_color|default:"#3B82F6" }}',
+                        secondary: '{{ site_settings.secondary_color|default:"#1F2937" }}',
+                        accent: '{{ site_settings.accent_color|default:"#10B981" }}',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'bounce-slow': 'bounce 2s infinite',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="{% url 'main:home' %}" class="text-2xl font-bold text-primary">
+                        {% if profile.name %}{{ profile.name|first|upper }}{% else %}P{% endif %}
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="{% url 'main:home' %}" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="{% url 'main:about' %}" class="nav-link px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="{% url 'main:projects' %}" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                        <a href="{% url 'main:skills' %}" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Skills</a>
+                        <a href="{% url 'main:achievements' %}" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Achievements</a>
+                        <a href="{% url 'main:contact' %}" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                
+                <!-- Right side -->
+                <div class="flex items-center space-x-4">
+                    <!-- Dark mode toggle -->
+                    {% if site_settings.enable_dark_mode %}
+                    <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" title="Toggle dark mode" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
+                        <i class="fas fa-moon text-blue-400 hidden dark:inline"></i>
+                    </button>
+                    {% endif %}
+                    
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden">
+                        <button id="mobileMenuButton" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" title="Toggle mobile menu" aria-label="Toggle mobile menu">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="{% url 'main:home' %}" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="{% url 'main:about' %}" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="{% url 'main:projects' %}" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="{% url 'main:skills' %}" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium">Skills</a>
+                <a href="{% url 'main:achievements' %}" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium">Achievements</a>
+                <a href="{% url 'main:contact' %}" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <p class="text-gray-600 dark:text-gray-400">
+                        © {% now "Y" %} {% if profile.name %}{{ profile.name }}{% else %}Portfolio{% endif %}. All rights reserved.
+                    </p>
+                </div>
+                
+                <!-- Social Links -->
+                {% if social_links %}
+                <div class="flex space-x-4">
+                    {% for link in social_links %}
+                    <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" 
+                       class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors">
+                        <i class="{{ link.icon_class }} text-xl"></i>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Script -->
+    {% if site_settings.enable_animations %}
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+    </script>
+    {% endif %}
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Dark mode functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const html = document.documentElement;
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true' || 
+            (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        }
+        
+        // Toggle dark mode
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', () => {
+                html.classList.toggle('dark');
+                localStorage.setItem('darkMode', html.classList.contains('dark'));
+            });
+        }
+        
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+        
+        // Active navigation highlighting
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+        
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPath) {
+                link.classList.add('text-primary', 'bg-primary/10');
+            } else {
+                link.classList.add('text-gray-600', 'dark:text-gray-300', 'hover:text-primary', 'dark:hover:text-primary');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+

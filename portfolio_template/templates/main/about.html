@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="py-20 bg-gradient-to-br from-primary/10 via-white to-accent/10 dark:from-primary/20 dark:via-gray-900 dark:to-accent/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6" data-aos="fade-up">
+            About Me
+        </h1>
+        <div class="w-24 h-1 bg-primary mx-auto rounded-full mb-8" data-aos="fade-up" data-aos-delay="100"></div>
+        {% if profile %}
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            {{ profile.tagline }}
+        </p>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Profile Section -->
+{% if profile %}
+<section class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Profile Picture -->
+            <div class="flex justify-center" data-aos="fade-right">
+                {% if profile.profile_picture %}
+                <div class="relative">
+                    <div class="w-96 h-96 rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800">
+                        <img src="{{ profile.profile_picture.url }}" 
+                             alt="{{ profile.name }}" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <!-- Decorative elements -->
+                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-accent rounded-full opacity-20 animate-bounce-slow"></div>
+                    <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-primary rounded-full opacity-20 animate-bounce-slow" style="animation-delay: 1s;"></div>
+                </div>
+                {% else %}
+                <div class="w-96 h-96 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-2xl">
+                    <i class="fas fa-user text-white text-9xl"></i>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Profile Information -->
+            <div class="space-y-6" data-aos="fade-left">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+                    {{ profile.name }}
+                </h2>
+                
+                <p class="text-xl text-primary font-semibold">
+                    {{ profile.tagline }}
+                </p>
+                
+                <div class="prose prose-lg dark:prose-invert max-w-none">
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        {{ profile.about_text }}
+                    </p>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="space-y-4">
+                    {% if profile.email %}
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-envelope text-primary text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Email</p>
+                            <p class="text-gray-900 dark:text-white font-medium">{{ profile.email }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if profile.phone %}
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-phone text-primary text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Phone</p>
+                            <p class="text-gray-900 dark:text-white font-medium">{{ profile.phone }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if profile.location %}
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                            <i class="fas fa-map-marker-alt text-primary text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">Location</p>
+                            <p class="text-gray-900 dark:text-white font-medium">{{ profile.location }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Resume Download -->
+                {% if profile.resume %}
+                <div class="pt-4">
+                    <a href="{% url 'main:download_resume' %}" 
+                       class="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Resume
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Skills Section -->
+{% if skills_by_category %}
+<section class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                My Skills & Expertise
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
+                A comprehensive overview of my technical skills and proficiency levels
+            </p>
+        </div>
+        
+        {% for category, skills in skills_by_category.items %}
+        <div class="mb-16" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1|add:0 }}">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                {{ category|title }}
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for skill in skills %}
+                <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            {% if skill.icon_url %}
+                            <img src="{{ skill.icon_url }}" alt="{{ skill.name }}" class="w-8 h-8">
+                            {% else %}
+                            <div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-code text-primary"></i>
+                            </div>
+                            {% endif %}
+                            <h4 class="font-semibold text-gray-900 dark:text-white">{{ skill.name }}</h4>
+                        </div>
+                        <span class="text-sm font-semibold text-primary">{{ skill.proficiency }}%</span>
+                    </div>
+                    
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                        <div class="bg-primary h-3 rounded-full transition-all duration-1000 ease-out" 
+                             style="width: {{ skill.proficiency }}%"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Education & Experience Section -->
+<section class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Education & Experience
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
+                My academic background and professional journey
+            </p>
+        </div>
+        
+        <div class="max-w-4xl mx-auto">
+            <!-- Education -->
+            <div class="mb-12" data-aos="fade-up">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                    <i class="fas fa-graduation-cap text-primary mr-3"></i>
+                    Education
+                </h3>
+                
+                <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl">
+                    <div class="text-center">
+                        <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                            Diploma in Computer Engineering
+                        </h4>
+                        <p class="text-primary font-semibold mb-2">Aditya College of Engineering, Surampalem</p>
+                        <p class="text-gray-600 dark:text-gray-300">2023 - 2026</p>
+                        <p class="text-gray-700 dark:text-gray-200 mt-3">
+                            Currently pursuing with a focus on computer engineering fundamentals, 
+                            programming, and software development. Current score: 76%
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Experience -->
+            <div class="mb-12" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                    <i class="fas fa-briefcase text-primary mr-3"></i>
+                    Experience
+                </h3>
+                
+                <div class="space-y-6">
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-mobile-alt text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 dark:text-white">Android Developer</h4>
+                                <p class="text-primary font-semibold">Freelance & Personal Projects</p>
+                                <p class="text-gray-600 dark:text-gray-300">2022 - Present</p>
+                                <p class="text-gray-700 dark:text-gray-200 mt-2">
+                                    Developed multiple Android applications for colleges, churches, and personal use. 
+                                    Specialized in Firebase integration and AI automation features.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-code text-primary text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900 dark:text-white">Web Developer</h4>
+                                <p class="text-primary font-semibold">Personal Projects & Learning</p>
+                                <p class="text-gray-600 dark:text-gray-300">2023 - Present</p>
+                                <p class="text-gray-700 dark:text-gray-200 mt-2">
+                                    Building web applications using modern technologies. 
+                                    Focused on creating responsive, user-friendly interfaces and backend systems.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Goals & Aspirations Section -->
+<section class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Goals & Aspirations
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-rocket text-primary text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Full-Stack Developer</h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Become a skilled full-stack developer proficient in both frontend and backend technologies
+                </p>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-cloud text-primary text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Cloud & AI Expertise</h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Master cloud technologies and AI automation to build intelligent, scalable solutions
+                </p>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg text-center" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-heart text-primary text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Social Impact</h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Contribute to open-source projects and build meaningful technology for society
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Hobbies & Interests Section -->
+<section class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Hobbies & Interests
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-music text-primary text-3xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Music & Podcasts</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                    Enjoy listening to music and educational podcasts
+                </p>
+            </div>
+            
+            <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-palette text-primary text-3xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">UI Design</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                    Passionate about creating beautiful user interfaces
+                </p>
+            </div>
+            
+            <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-flask text-primary text-3xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Tech Experiments</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                    Love experimenting with new technologies
+                </p>
+            </div>
+            
+            <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+                <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-book-open text-primary text-3xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Bible & Meditation</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                    Spiritual growth and personal development
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            Want to Know More?
+        </h2>
+        <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+            I'm always excited to share more about my journey, skills, and experiences. 
+            Let's connect and discuss how we can work together!
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'main:contact' %}" 
+               class="inline-flex items-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl">
+                <i class="fas fa-paper-plane mr-2"></i>
+                Get In Touch
+            </a>
+            
+            <a href="{% url 'main:projects' %}" 
+               class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-primary transition-colors">
+                <i class="fas fa-eye mr-2"></i>
+                View My Work
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

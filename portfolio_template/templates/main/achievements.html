@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="py-20 bg-gradient-to-br from-primary/10 via-white to-accent/10 dark:from-primary/20 dark:via-gray-900 dark:to-accent/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6" data-aos="fade-up">
+            My Achievements
+        </h1>
+        <div class="w-24 h-1 bg-primary mx-auto rounded-full mb-8" data-aos="fade-up" data-aos-delay="100"></div>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            Milestones, accomplishments, and recognition that mark my journey in technology and development
+        </p>
+    </div>
+</section>
+
+<!-- Achievements Section -->
+<section class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {% if achievements %}
+        <!-- Timeline View -->
+        <div class="relative">
+            <!-- Timeline Line -->
+            <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-primary/30 transform md:translate-x-1/2"></div>
+            
+            <!-- Timeline Items -->
+            <div class="space-y-12">
+                {% for achievement in achievements %}
+                <div class="relative flex items-start {% if forloop.counter|divisibleby:2 %}md:flex-row-reverse{% endif %} space-x-6 md:space-x-0" data-aos="{% if forloop.counter|divisibleby:2 %}fade-left{% else %}fade-right{% endif %}" data-aos-delay="{{ forloop.counter0|add:1|add:0 }}">
+                    <!-- Timeline Dot -->
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0 z-10 relative">
+                        <span class="text-2xl">{{ achievement.icon }}</span>
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl shadow-lg flex-1 {% if forloop.counter|divisibleby:2 %}md:mr-8{% else %}md:ml-8{% endif %} border border-gray-100 dark:border-gray-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ achievement.title }}</h3>
+                            <span class="text-lg font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
+                                {{ achievement.year }}
+                            </span>
+                        </div>
+                        
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            {{ achievement.description }}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Achievements Grid View (Alternative) -->
+        <div class="mt-20" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
+                <i class="fas fa-trophy text-primary mr-3"></i>
+                All Achievements
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for achievement in achievements %}
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-700" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1|add:0 }}">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">{{ achievement.icon }}</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">{{ achievement.title }}</h3>
+                        <span class="text-primary font-semibold">{{ achievement.year }}</span>
+                    </div>
+                    
+                    <p class="text-gray-600 dark:text-gray-300 text-center">
+                        {{ achievement.description|truncatewords:20 }}
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        {% else %}
+        <!-- No Achievements Message -->
+        <div class="text-center py-20" data-aos="fade-up">
+            <div class="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-trophy text-primary text-4xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                No Achievements Added Yet
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 max-w-md mx-auto mb-8">
+                Achievements will appear here once you add them through the Django admin panel. 
+                Each achievement can include a title, description, year, and custom icon.
+            </p>
+            <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl max-w-md mx-auto">
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-2">To add achievements:</h4>
+                <ol class="text-sm text-gray-600 dark:text-gray-300 text-left space-y-1">
+                    <li>1. Go to Django admin panel</li>
+                    <li>2. Navigate to "Achievements" section</li>
+                    <li>3. Click "Add Achievement"</li>
+                    <li>4. Fill in achievement details and save</li>
+                </ol>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Personal Milestones Section -->
+<section class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Personal Milestones
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
+                Key moments and breakthroughs in my development journey
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-mobile-alt text-green-600 dark:text-green-400 text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">First Android App</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                    Successfully published my first Android application to the Google Play Store
+                </p>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-fire text-blue-600 dark:text-blue-400 text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Firebase Mastery</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                    Learned and implemented Firebase services for authentication, database, and cloud functions
+                </p>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg text-center" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-robot text-purple-600 dark:text-purple-400 text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">AI Integration</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                    Successfully integrated AI automation features into mobile applications
+                </p>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg text-center" data-aos="fade-up" data-aos-delay="400">
+                <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-globe text-yellow-600 dark:text-yellow-400 text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Web Development</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                    Expanded skills to include web technologies and full-stack development
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Future Goals Section -->
+<section class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Future Goals & Aspirations
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
+                What I'm working towards and where I see myself in the future
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-gradient-to-br from-primary/5 to-accent/5 p-8 rounded-2xl border border-primary/20" data-aos="fade-right">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                        <i class="fas fa-rocket text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Short-term Goals</h3>
+                </div>
+                <ul class="space-y-3 text-gray-600 dark:text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        Master Django and Python web development
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        Build a comprehensive portfolio website
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        Contribute to open-source projects
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                        Learn advanced cloud technologies
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="bg-gradient-to-br from-accent/5 to-primary/5 p-8 rounded-2xl border border-accent/20" data-aos="fade-left">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mr-4">
+                        <i class="fas fa-star text-accent text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Long-term Vision</h3>
+                </div>
+                <ul class="space-y-3 text-gray-600 dark:text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fas fa-arrow-right text-primary mr-3 mt-1"></i>
+                        Become a senior full-stack developer
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-arrow-right text-primary mr-3 mt-1"></i>
+                        Lead development teams on innovative projects
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-arrow-right text-primary mr-3 mt-1"></i>
+                        Create technology solutions for social impact
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-arrow-right text-primary mr-3 mt-1"></i>
+                        Mentor aspiring developers
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            Let's Achieve Together
+        </h2>
+        <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+            Every achievement is a stepping stone to greater things. 
+            I'm excited to work on new challenges and create more success stories!
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'main:contact' %}" 
+               class="inline-flex items-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl">
+                <i class="fas fa-paper-plane mr-2"></i>
+                Start a Project
+            </a>
+            
+            <a href="{% url 'main:projects' %}" 
+               class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-primary transition-colors">
+                <i class="fas fa-eye mr-2"></i>
+                View My Work
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

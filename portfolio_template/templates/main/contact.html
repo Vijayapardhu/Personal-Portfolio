@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="py-20 bg-gradient-to-br from-primary/10 via-white to-accent/10 dark:from-primary/20 dark:via-gray-900 dark:to-accent/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6" data-aos="fade-up">
+            Get In Touch
+        </h1>
+        <div class="w-24 h-1 bg-primary mx-auto rounded-full mb-8" data-aos="fade-up" data-aos-delay="100"></div>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            I'm always excited to hear about new opportunities, projects, or just to chat about technology. 
+            Let's start a conversation!
+        </p>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Contact Information -->
+            <div class="space-y-8" data-aos="fade-right">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                        Let's Connect
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Whether you have a project in mind, want to discuss collaboration opportunities, 
+                        or just want to say hello, I'd love to hear from you. 
+                        I'm always open to new challenges and exciting projects.
+                    </p>
+                </div>
+                
+                <!-- Contact Details -->
+                {% if profile %}
+                <div class="space-y-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-envelope text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Email</h3>
+                            <p class="text-gray-600 dark:text-gray-300">{{ profile.email }}</p>
+                            <a href="mailto:{{ profile.email }}" class="text-primary hover:text-primary/80 text-sm transition-colors">
+                                Send me an email
+                            </a>
+                        </div>
+                    </div>
+                    
+                    {% if profile.phone %}
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-phone text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Phone</h3>
+                            <p class="text-gray-600 dark:text-gray-300">{{ profile.phone }}</p>
+                            <a href="tel:{{ profile.phone }}" class="text-primary hover:text-primary/80 text-sm transition-colors">
+                                Call me
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if profile.location %}
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Location</h3>
+                            <p class="text-gray-600 dark:text-gray-300">{{ profile.location }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+                
+                <!-- Social Links -->
+                {% if social_links %}
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Follow Me</h3>
+                    <div class="flex space-x-4">
+                        {% for link in social_links %}
+                        <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" 
+                           class="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300 group">
+                            <i class="{{ link.icon_class }} text-xl group-hover:text-white"></i>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Resume Download -->
+                {% if profile and profile.resume %}
+                <div class="pt-4">
+                    <a href="{% url 'main:download_resume' %}" 
+                       class="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Resume
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl" data-aos="fade-left">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                    Send a Message
+                </h3>
+                
+                {% if messages %}
+                <div class="mb-6">
+                    {% for message in messages %}
+                    <div class="p-4 rounded-lg {% if message.tags == 'success' %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200{% else %}bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200{% endif %}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <form method="post" class="space-y-6">
+                    {% csrf_token %}
+                    
+                    <div>
+                        {{ form.name }}
+                        {% if form.name.errors %}
+                        <div class="text-red-600 text-sm mt-1">{{ form.name.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                        <div class="text-red-600 text-sm mt-1">{{ form.email.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div>
+                        {{ form.subject }}
+                        {% if form.subject.errors %}
+                        <div class="text-red-600 text-sm mt-1">{{ form.subject.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div>
+                        {{ form.message }}
+                        {% if form.message.errors %}
+                        <div class="text-red-600 text-sm mt-1">{{ form.message.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <button type="submit" 
+                            class="w-full bg-primary text-white font-semibold py-3 px-6 rounded-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        Send Message
+                    </button>
+                </form>
+                
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        I'll get back to you within 24 hours!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Frequently Asked Questions
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+        </div>
+        
+        <div class="space-y-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                    What types of projects do you work on?
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    I specialize in Android development, web applications, and AI automation projects. 
+                    I'm particularly interested in projects that solve real-world problems and have social impact.
+                </p>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                    How quickly can you start working on a project?
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    I can typically start within 1-2 weeks of project approval. 
+                    For urgent projects, I can often begin immediately depending on my current workload.
+                </p>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                    Do you work with international clients?
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Absolutely! I'm comfortable working with clients from anywhere in the world. 
+                    I'm fluent in English and can accommodate different time zones for meetings.
+                </p>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                    What's your preferred communication method?
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    I prefer email for initial contact and project details, but I'm happy to use 
+                    video calls, phone calls, or messaging apps for ongoing communication.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            Ready to Start Something Amazing?
+        </h2>
+        <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+            Let's turn your ideas into reality. Whether it's a mobile app, web application, 
+            or something completely unique, I'm here to help bring your vision to life.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#contact" 
+               class="inline-flex items-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl">
+                <i class="fas fa-rocket mr-2"></i>
+                Start Your Project
+            </a>
+            
+            <a href="{% url 'main:projects' %}" 
+               class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-primary transition-colors">
+                <i class="fas fa-eye mr-2"></i>
+                See My Work
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

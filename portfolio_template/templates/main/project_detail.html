@@ -1,0 +1,305 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="py-20 bg-gradient-to-br from-primary/10 via-white to-accent/10 dark:from-primary/20 dark:via-gray-900 dark:to-accent/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6" data-aos="fade-up">
+                {{ project.title }}
+            </h1>
+            <div class="w-24 h-1 bg-primary mx-auto rounded-full mb-8" data-aos="fade-up" data-aos-delay="100"></div>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                {{ project.short_description }}
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Project Details Section -->
+<section class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Project Image -->
+            <div data-aos="fade-right">
+                {% if project.image %}
+                <div class="rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="{{ project.image.url }}" 
+                         alt="{{ project.title }}" 
+                         class="w-full h-auto">
+                </div>
+                {% else %}
+                <div class="h-96 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center shadow-2xl">
+                    <i class="fas fa-code text-white text-8xl"></i>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Project Information -->
+            <div class="space-y-8" data-aos="fade-left">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                        Project Overview
+                    </h2>
+                    <div class="prose prose-lg dark:prose-invert max-w-none">
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            {{ project.description }}
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Tech Stack -->
+                {% if project.tech_stack.all %}
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                        Technologies Used
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        {% for skill in project.tech_stack.all %}
+                        <span class="px-4 py-2 bg-primary/10 text-primary font-medium rounded-full border border-primary/20">
+                            {{ skill.name }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Project Links -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                        Project Links
+                    </h3>
+                    <div class="space-y-3">
+                        {% if project.github_link %}
+                        <a href="{{ project.github_link }}" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center w-full bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition-colors font-semibold">
+                            <i class="fab fa-github mr-3 text-xl"></i>
+                            View Source Code on GitHub
+                        </a>
+                        {% endif %}
+                        
+                        {% if project.live_link %}
+                        <a href="{{ project.live_link }}" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center w-full bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors font-semibold">
+                            <i class="fas fa-external-link-alt mr-3 text-xl"></i>
+                            View Live Demo
+                        </a>
+                        {% endif %}
+                        
+                        {% if not project.github_link and not project.live_link %}
+                        <div class="text-center py-8 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                            <i class="fas fa-info-circle text-gray-400 text-3xl mb-3"></i>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                No external links available for this project.
+                            </p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Project Features -->
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                        Key Features
+                    </h3>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                            Responsive design that works on all devices
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                            Modern UI/UX with intuitive navigation
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                            Optimized performance and fast loading
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                            Cross-platform compatibility
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Project Gallery Section (if multiple images) -->
+{% if project.image %}
+<section class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Project Screenshots
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100">
+            <!-- Main Project Image -->
+            <div class="bg-white dark:bg-gray-900 p-4 rounded-xl shadow-lg">
+                <img src="{{ project.image.url }}" 
+                     alt="{{ project.title }} - Main View" 
+                     class="w-full h-64 object-cover rounded-lg">
+                <p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3">Main View</p>
+            </div>
+            
+            <!-- Placeholder for additional screenshots -->
+            <div class="bg-white dark:bg-gray-900 p-4 rounded-xl shadow-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
+                <div class="w-full h-64 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-plus text-gray-400 text-3xl"></i>
+                </div>
+                <p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3">Add More Screenshots</p>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-900 p-4 rounded-xl shadow-lg border-2 border-dashed border-gray-300 dark:border-gray-600">
+                <div class="w-full h-64 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-plus text-gray-400 text-3xl"></i>
+                </div>
+                <p class="text-center text-sm text-gray-600 dark:text-gray-400 mt-3">Add More Screenshots</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Development Process Section -->
+<section class="py-20 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Development Process
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-lightbulb text-primary text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Planning</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                    Requirements analysis and project planning
+                </p>
+            </div>
+            
+            <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-pencil-ruler text-primary text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Design</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                    UI/UX design and wireframing
+                </p>
+            </div>
+            
+            <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-code text-primary text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Development</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                    Coding and implementation
+                </p>
+            </div>
+            
+            <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+                <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-rocket text-primary text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Launch</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                    Testing and deployment
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Projects Section -->
+<section class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                More Projects
+            </h2>
+            <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            <p class="text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto">
+                Check out some of my other work
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for other_project in projects|slice:":3" %}
+            {% if other_project.id != project.id %}
+            <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-xl transition-shadow overflow-hidden border border-gray-100 dark:border-gray-700" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1|add:0 }}">
+                {% if other_project.image %}
+                <div class="relative overflow-hidden h-48">
+                    <img src="{{ other_project.image.url }}" 
+                         alt="{{ other_project.title }}" 
+                         class="w-full h-full object-cover hover:scale-110 transition-transform duration-300">
+                </div>
+                {% else %}
+                <div class="h-48 bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                    <i class="fas fa-code text-white text-4xl"></i>
+                </div>
+                {% endif %}
+                
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                        {{ other_project.title }}
+                    </h3>
+                    
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        {{ other_project.short_description|truncatewords:15 }}
+                    </p>
+                    
+                    <a href="{% url 'main:project_detail' other_project.id %}" 
+                       class="inline-flex items-center text-primary hover:text-primary/80 font-medium transition-colors">
+                        View Project <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="{% url 'main:projects' %}" 
+               class="inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                View All Projects
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-20 bg-primary text-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            Like What You See?
+        </h2>
+        <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+            I'm always excited to work on new projects and bring creative ideas to life. 
+            Let's discuss how we can work together!
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'main:contact' %}" 
+               class="inline-flex items-center px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl">
+                <i class="fas fa-paper-plane mr-2"></i>
+                Start a Project
+            </a>
+            
+            <a href="{% url 'main:about' %}" 
+               class="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-primary transition-colors">
+                <i class="fas fa-user mr-2"></i>
+                Learn About Me
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
