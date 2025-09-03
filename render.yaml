@@ -41,6 +41,7 @@ services:
 
 databases:
   - name: vijayapardhu-db
-    plan: basic
+    plan: free
     region: oregon
     postgresMajorVersion: 15
+    databaseName: vijayapardhuportfolio
