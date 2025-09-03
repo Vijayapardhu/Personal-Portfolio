@@ -2,12 +2,9 @@ services:
   - type: web
     name: vijayapardhu-portfolio
     env: python
-    plan: starter
+    plan: free
     region: oregon
-    buildCommand: |
-      pip install -r requirements.txt
-      python manage.py collectstatic --noinput
-      python manage.py migrate
+    buildCommand: ./build.sh
     startCommand: gunicorn portfolio_template.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
@@ -17,7 +14,7 @@ services:
       - key: DEBUG
         value: false
       - key: ALLOWED_HOSTS
-        value: .onrender.com
+        value: personal-portfolio-rnx8.onrender.com, .onrender.com
       - key: DATABASE_URL
         fromDatabase:
           name: vijayapardhu-db
@@ -44,4 +41,3 @@ databases:
     plan: free
     region: oregon
     postgresMajorVersion: 15
-    databaseName: vijayapardhuportfolio
