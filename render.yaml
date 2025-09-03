@@ -41,7 +41,6 @@ services:
 
 databases:
   - name: vijayapardhu-db
-    env: postgres
     plan: basic
     region: oregon
-    version: 15
+    postgresMajorVersion: 15
