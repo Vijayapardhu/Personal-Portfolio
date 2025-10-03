@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# Exit immediately if a command exits with a non-zero status.
+# Build script for Render deployment
 set -e
 
+echo "Installing dependencies..."
 pip install -r requirements.txt
-python manage.py collectstatic --noinput
-python manage.py migrate
-python load_portfolio_data.py
-python create_admin_auto.py
+
+echo "Loading portfolio data..."
+python load_portfolio_data.py || echo "Portfolio data loading skipped"
+
+echo "Build completed successfully!"

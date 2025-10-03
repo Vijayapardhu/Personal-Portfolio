@@ -1,1 +1,2 @@
-web: gunicorn portfolio_template.wsgi:application
+web: gunicorn portfolio_template.wsgi:application --bind 0.0.0.0:$PORT
+release: python manage.py migrate
