@@ -78,6 +78,87 @@
         * {
             transition: all 0.3s ease;
         }
+        
+        /* Mobile responsiveness improvements */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+                line-height: 1.2;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.25rem !important;
+            }
+            
+            .mobile-padding {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .mobile-text-center {
+                text-align: center;
+            }
+            
+            .mobile-full-width {
+                width: 100%;
+            }
+            
+            .mobile-stack {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .profile-image-mobile {
+                width: 250px !important;
+                height: 250px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem !important;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.125rem !important;
+            }
+            
+            .profile-image-mobile {
+                width: 200px !important;
+                height: 200px !important;
+            }
+            
+            .mobile-text-sm {
+                font-size: 0.875rem;
+            }
+        }
+        
+        /* Better button responsiveness */
+        .btn-responsive {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
+        }
+        
+        @media (min-width: 640px) {
+            .btn-responsive {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+        
+        /* Improved mobile navigation */
+        .mobile-nav-open {
+            max-height: 500px;
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .mobile-nav-closed {
+            max-height: 0;
+            opacity: 0;
+            visibility: hidden;
+            overflow: hidden;
+        }
     </style>
     
     <!-- TailwindCSS Config -->
@@ -145,14 +226,26 @@
         </div>
         
         <!-- Mobile Navigation -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="{% url 'main:home' %}" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                <a href="{% url 'main:about' %}" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium">About</a>
-                <a href="{% url 'main:projects' %}" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-                <a href="{% url 'main:skills' %}" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium">Skills</a>
-                <a href="{% url 'main:achievements' %}" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium">Achievements</a>
-                <a href="{% url 'main:contact' %}" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+        <div id="mobileMenu" class="mobile-nav-closed md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 transition-all duration-300 ease-in-out">
+            <div class="px-4 pt-4 pb-6 space-y-2">
+                <a href="{% url 'main:home' %}" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <i class="fas fa-home mr-3 text-primary"></i>Home
+                </a>
+                <a href="{% url 'main:about' %}" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <i class="fas fa-user mr-3 text-primary"></i>About
+                </a>
+                <a href="{% url 'main:projects' %}" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <i class="fas fa-code mr-3 text-primary"></i>Projects
+                </a>
+                <a href="{% url 'main:skills' %}" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <i class="fas fa-cogs mr-3 text-primary"></i>Skills
+                </a>
+                <a href="{% url 'main:achievements' %}" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <i class="fas fa-trophy mr-3 text-primary"></i>Achievements
+                </a>
+                <a href="{% url 'main:contact' %}" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <i class="fas fa-envelope mr-3 text-primary"></i>Contact
+                </a>
             </div>
         </div>
     </nav>
@@ -226,7 +319,32 @@
         
         if (mobileMenuButton && mobileMenu) {
             mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
+                const isOpen = mobileMenu.classList.contains('mobile-nav-open');
+                
+                if (isOpen) {
+                    mobileMenu.classList.remove('mobile-nav-open');
+                    mobileMenu.classList.add('mobile-nav-closed');
+                } else {
+                    mobileMenu.classList.remove('mobile-nav-closed');
+                    mobileMenu.classList.add('mobile-nav-open');
+                }
+            });
+            
+            // Close mobile menu when clicking on a link
+            const mobileNavLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('mobile-nav-open');
+                    mobileMenu.classList.add('mobile-nav-closed');
+                });
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.remove('mobile-nav-open');
+                    mobileMenu.classList.add('mobile-nav-closed');
+                }
             });
         }
         

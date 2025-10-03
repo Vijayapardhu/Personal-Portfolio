@@ -6,8 +6,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <!-- Left Column - Text Content -->
-            <div class="space-y-6" data-aos="fade-right">
-                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+            <div class="space-y-6 mobile-text-center" data-aos="fade-right">
+                <h1 class="hero-title text-4xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
                     {% if site_settings.hero_title %}
                         {{ site_settings.hero_title }}
                     {% else %}
@@ -15,7 +15,7 @@
                     {% endif %}
                 </h1>
                 
-                <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                <p class="hero-subtitle text-xl md:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed">
                     {% if site_settings.hero_subtitle %}
                         {{ site_settings.hero_subtitle }}
                     {% else %}
@@ -29,15 +29,15 @@
                 </p>
                 {% endif %}
                 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mobile-stack">
                     <a href="{% url 'main:projects' %}" 
-                       class="inline-flex items-center px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
+                       class="btn-responsive mobile-full-width inline-flex items-center justify-center bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl">
                         <i class="fas fa-rocket mr-2"></i>
                         View My Work
                     </a>
                     
                     <a href="{% url 'main:contact' %}" 
-                       class="inline-flex items-center px-8 py-4 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-colors">
+                       class="btn-responsive mobile-full-width inline-flex items-center justify-center border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-colors">
                         <i class="fas fa-envelope mr-2"></i>
                         Get In Touch
                     </a>
@@ -48,18 +48,18 @@
             <div class="flex justify-center" data-aos="fade-left">
                 {% if profile and profile.profile_picture %}
                 <div class="relative">
-                    <div class="w-80 h-80 rounded-full overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800">
+                    <div class="profile-image-mobile w-80 h-80 rounded-full overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800">
                         <img src="{{ profile.profile_picture.url }}" 
                              alt="{{ profile.name }}" 
                              class="w-full h-full object-cover">
                     </div>
                     <!-- Decorative elements -->
-                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-accent rounded-full opacity-20 animate-bounce-slow"></div>
-                    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-primary rounded-full opacity-20 animate-bounce-slow" style="animation-delay: 1s;"></div>
+                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-accent rounded-full opacity-20 animate-bounce-slow hidden sm:block"></div>
+                    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-primary rounded-full opacity-20 animate-bounce-slow hidden sm:block" style="animation-delay: 1s;"></div>
                 </div>
                 {% else %}
-                <div class="w-80 h-80 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-2xl">
-                    <i class="fas fa-user text-white text-8xl"></i>
+                <div class="profile-image-mobile w-80 h-80 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-2xl">
+                    <i class="fas fa-user text-white text-6xl md:text-8xl"></i>
                 </div>
                 {% endif %}
             </div>
