@@ -30,32 +30,38 @@
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- Typed.js for typing effect -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    
     <!-- Custom CSS -->
     <style>
         /* Custom scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
         ::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
         ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 4px;
+            background: linear-gradient(180deg, #3B82F6, #10B981);
+            border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #555;
+            background: linear-gradient(180deg, #2563EB, #059669);
         }
         
         /* Dark mode scrollbar */
         .dark ::-webkit-scrollbar-track {
-            background: #374151;
+            background: #1F2937;
         }
         .dark ::-webkit-scrollbar-thumb {
-            background: #6b7280;
+            background: linear-gradient(180deg, #60A5FA, #34D399);
         }
         .dark ::-webkit-scrollbar-thumb:hover {
-            background: #9ca3af;
+            background: linear-gradient(180deg, #3B82F6, #10B981);
         }
         
         /* Custom animations */
@@ -74,9 +80,181 @@
             }
         }
         
-        /* Smooth transitions */
-        * {
-            transition: all 0.3s ease;
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Gradient background animation */
+        .animated-gradient {
+            background: linear-gradient(270deg, #3B82F6, #10B981, #8B5CF6);
+            background-size: 600% 600%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        /* Floating animation */
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Glow effect */
+        .glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        /* Card hover effects */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Button glow effect */
+        .btn-glow {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-glow:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        /* Smooth transitions for specific interactive elements */
+        a, button, .card-hover, .btn-glow, nav, input, textarea, select {
+            transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* Typing animation */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        
+        .typing-effect {
+            overflow: hidden;
+            border-right: 3px solid #3B82F6;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40) 1s 1 normal both, blink 0.75s step-end infinite;
+        }
+        
+        /* Pulse animation */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* 3D card effect */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        
+        .card-3d:hover {
+            transform: rotateY(5deg) rotateX(5deg);
+        }
+        
+        /* Shine effect */
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+        
+        .shine {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shine::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 3s infinite;
         }
         
         /* Mobile responsiveness improvements */
@@ -255,9 +433,23 @@
         {% block content %}{% endblock %}
     </main>
 
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="fixed bottom-8 right-8 bg-primary text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-110 opacity-0 invisible z-50" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
     <!-- Footer -->
-    <footer class="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <footer class="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 relative overflow-hidden">
+        <!-- Animated wave -->
+        <div class="absolute top-0 left-0 w-full overflow-hidden" style="line-height: 0;">
+            <svg class="relative block w-full h-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" 
+                      class="fill-current text-white dark:text-gray-900" 
+                      style="opacity: 0.3;"></path>
+            </svg>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="text-center md:text-left mb-4 md:mb-0">
                     <p class="text-gray-600 dark:text-gray-400">
@@ -270,7 +462,7 @@
                 <div class="flex space-x-4">
                     {% for link in social_links %}
                     <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" 
-                       class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors">
+                       class="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-all transform hover:scale-125 hover:-translate-y-1">
                         <i class="{{ link.icon_class }} text-xl"></i>
                     </a>
                     {% endfor %}
@@ -310,6 +502,12 @@
             darkModeToggle.addEventListener('click', () => {
                 html.classList.toggle('dark');
                 localStorage.setItem('darkMode', html.classList.contains('dark'));
+                
+                // Add animation feedback
+                darkModeToggle.style.transform = 'rotate(360deg)';
+                setTimeout(() => {
+                    darkModeToggle.style.transform = 'rotate(0deg)';
+                }, 300);
             });
         }
         
@@ -373,7 +571,187 @@
                 }
             });
         });
+        
+        // Add scroll animations to skill bars
+        const observeSkillBars = () => {
+            const skillBars = document.querySelectorAll('.skill-bar');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target;
+                        const width = bar.getAttribute('data-width');
+                        bar.style.width = width + '%';
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            skillBars.forEach(bar => {
+                bar.style.width = '0%';
+                observer.observe(bar);
+            });
+        };
+        
+        // Initialize skill bar animations when page loads
+        window.addEventListener('load', observeSkillBars);
+        
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax');
+            
+            parallaxElements.forEach(element => {
+                const speed = element.dataset.speed || 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+        
+        // Add cursor trail effect
+        const cursorDot = document.createElement('div');
+        cursorDot.className = 'cursor-dot';
+        cursorDot.style.cssText = `
+            width: 8px;
+            height: 8px;
+            background: #3B82F6;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease;
+            display: none;
+        `;
+        document.body.appendChild(cursorDot);
+        
+        const cursorCircle = document.createElement('div');
+        cursorCircle.className = 'cursor-circle';
+        cursorCircle.style.cssText = `
+            width: 32px;
+            height: 32px;
+            border: 2px solid #3B82F6;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.15s ease;
+            display: none;
+        `;
+        document.body.appendChild(cursorCircle);
+        
+        // Show custom cursor only on desktop
+        const DESKTOP_BREAKPOINT = 768;
+        if (window.innerWidth > DESKTOP_BREAKPOINT) {
+            cursorDot.style.display = 'block';
+            cursorCircle.style.display = 'block';
+            
+            document.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = e.clientX + 'px';
+                cursorDot.style.top = e.clientY + 'px';
+                
+                cursorCircle.style.left = (e.clientX - 16) + 'px';
+                cursorCircle.style.top = (e.clientY - 16) + 'px';
+            });
+            
+            document.addEventListener('mousedown', () => {
+                cursorDot.style.transform = 'scale(1.5)';
+                cursorCircle.style.transform = 'scale(0.8)';
+            });
+            
+            document.addEventListener('mouseup', () => {
+                cursorDot.style.transform = 'scale(1)';
+                cursorCircle.style.transform = 'scale(1)';
+            });
+            
+            // Expand cursor on hover over interactive elements
+            const interactiveElements = document.querySelectorAll('a, button, .card-hover');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorCircle.style.transform = 'scale(1.5)';
+                    cursorCircle.style.borderColor = '#10B981';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    cursorCircle.style.transform = 'scale(1)';
+                    cursorCircle.style.borderColor = '#3B82F6';
+                });
+            });
+        }
+        
+        // Add loading animation
+        const loader = document.createElement('div');
+        loader.className = 'page-loader';
+        loader.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        `;
+        
+        const spinner = document.createElement('div');
+        spinner.style.cssText = `
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        `;
+        
+        loader.appendChild(spinner);
+        
+        // Add loader immediately
+        if (!document.querySelector('.page-loader')) {
+            document.body.insertBefore(loader, document.body.firstChild);
+        }
+        
+        // Remove loader after page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    if (loader.parentNode) {
+                        loader.parentNode.removeChild(loader);
+                    }
+                }, 500);
+            }, 800);
+        });
+        
+        // Add spin animation for loader
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Scroll to top button functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.remove('opacity-0', 'invisible');
+                scrollToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                scrollToTopBtn.classList.remove('opacity-100', 'visible');
+                scrollToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     </script>
+    
+    {% block extra_js %}{% endblock %}
 </body>
 </html>
 
