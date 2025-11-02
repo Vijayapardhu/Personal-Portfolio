@@ -28,12 +28,12 @@
                 {% for achievement in achievements %}
                 <div class="relative flex items-start {% if forloop.counter|divisibleby:2 %}md:flex-row-reverse{% endif %} space-x-6 md:space-x-0" data-aos="{% if forloop.counter|divisibleby:2 %}fade-left{% else %}fade-right{% endif %}" data-aos-delay="{{ forloop.counter0|add:1|add:0 }}">
                     <!-- Timeline Dot -->
-                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0 z-10 relative">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center flex-shrink-0 z-10 relative pulse">
                         <span class="text-2xl">{{ achievement.icon }}</span>
                     </div>
                     
                     <!-- Content -->
-                    <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl shadow-lg flex-1 {% if forloop.counter|divisibleby:2 %}md:mr-8{% else %}md:ml-8{% endif %} border border-gray-100 dark:border-gray-700">
+                    <div class="card-hover bg-gray-50 dark:bg-gray-800 p-6 rounded-xl shadow-lg flex-1 {% if forloop.counter|divisibleby:2 %}md:mr-8{% else %}md:ml-8{% endif %} border border-gray-100 dark:border-gray-700">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-xl font-bold text-gray-900 dark:text-white">{{ achievement.title }}</h3>
                             <span class="text-lg font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
@@ -59,7 +59,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% for achievement in achievements %}
-                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-700" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1|add:0 }}">
+                <div class="card-hover card-3d bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 dark:border-gray-700" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1|add:0 }}">
                     <div class="text-center mb-4">
                         <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                             <span class="text-3xl">{{ achievement.icon }}</span>
