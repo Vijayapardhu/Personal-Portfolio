@@ -413,7 +413,7 @@
 
     // Typing effect for hero title
     if (typeof Typed !== 'undefined') {
-        const heroTitle = "{% if site_settings.hero_title %}{{ site_settings.hero_title }}{% else %}Welcome to My Portfolio{% endif %}";
+        const heroTitle = "{% if site_settings.hero_title %}{{ site_settings.hero_title|escapejs }}{% else %}Welcome to My Portfolio{% endif %}";
         
         new Typed('#typed-hero', {
             strings: [heroTitle],

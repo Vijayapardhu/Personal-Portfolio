@@ -183,9 +183,9 @@
             height: 300px;
         }
         
-        /* Smooth transitions */
-        * {
-            transition: color 0.3s ease, background-color 0.3s ease;
+        /* Smooth transitions for specific interactive elements */
+        a, button, .card-hover, .btn-glow, nav, input, textarea, select {
+            transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         /* Typing animation */
@@ -637,7 +637,8 @@
         document.body.appendChild(cursorCircle);
         
         // Show custom cursor only on desktop
-        if (window.innerWidth > 768) {
+        const DESKTOP_BREAKPOINT = 768;
+        if (window.innerWidth > DESKTOP_BREAKPOINT) {
             cursorDot.style.display = 'block';
             cursorCircle.style.display = 'block';
             
@@ -675,40 +676,41 @@
         }
         
         // Add loading animation
+        const loader = document.createElement('div');
+        loader.className = 'page-loader';
+        loader.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        `;
+        
+        const spinner = document.createElement('div');
+        spinner.style.cssText = `
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        `;
+        
+        loader.appendChild(spinner);
+        
+        // Add loader immediately
+        if (!document.querySelector('.page-loader')) {
+            document.body.insertBefore(loader, document.body.firstChild);
+        }
+        
+        // Remove loader after page loads
         window.addEventListener('load', () => {
-            const loader = document.createElement('div');
-            loader.className = 'page-loader';
-            loader.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 10000;
-                transition: opacity 0.5s ease;
-            `;
-            
-            const spinner = document.createElement('div');
-            spinner.style.cssText = `
-                width: 50px;
-                height: 50px;
-                border: 4px solid rgba(255, 255, 255, 0.3);
-                border-top-color: white;
-                border-radius: 50%;
-                animation: spin 1s linear infinite;
-            `;
-            
-            loader.appendChild(spinner);
-            
-            // Only show loader if it doesn't already exist
-            if (!document.querySelector('.page-loader')) {
-                document.body.insertBefore(loader, document.body.firstChild);
-            }
-            
             setTimeout(() => {
                 loader.style.opacity = '0';
                 setTimeout(() => {
